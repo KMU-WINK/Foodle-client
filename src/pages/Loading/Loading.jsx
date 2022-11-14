@@ -15,25 +15,28 @@ const Loading = () => {
 
   const callback = () => {
     // Progress 이벤트 loop code
-    // if (progress > 100) { 
+    // if (progress > 100) {
     //   setProgress(0);
     // } else {
     //   setProgress(progress + 1);
     // }
     setProgress(progress + 1);
-  }
+  };
 
   useEffect(() => {
     savedCallback.current = callback;
-  })
+  });
 
   useEffect(() => {
     const tick = () => {
       savedCallback.current();
-    }
+    };
     const timer = setInterval(tick, 50);
     return () => clearInterval(timer);
   }, []);
+
+  const loadingTextList = ["L", "O", "A", "D", "I", "N", "G", " ", ".", ".", "."];
+  const loadingText = loadingTextList.map((text) => <span>{text}</span>);
 
   return (
     <Background>
@@ -45,19 +48,7 @@ const Loading = () => {
           <ProgressEmpty />
         </EmptyBox>
       </LoadingImage>
-      <LoadingText>
-        <span>L</span>
-        <span>O</span>
-        <span>A</span>
-        <span>D</span>
-        <span>I</span>
-        <span>N</span>
-        <span>G</span>
-        <span> </span>
-        <span>.</span>
-        <span>.</span>
-        <span>.</span>
-      </LoadingText>
+      <LoadingText>{loadingText}</LoadingText>
     </Background>
   );
 };
