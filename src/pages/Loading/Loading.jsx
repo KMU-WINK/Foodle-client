@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Background,
   EmptyBox,
@@ -11,13 +11,29 @@ import {
 
 const Loading = () => {
   const [progress, setProgress] = useState(0);
+  const savedCallback = useRef();
 
-  //   useEffect(() => {
-  //     const update = setInterval(() => {
-  //       setProgress((progress) => progress + 1);
-  //       console.log(progress);
-  //     }, 1000);
-  //   }, [progress]);
+  const callback = () => {
+    // Progress 이벤트 loop code
+    // if (progress > 100) { 
+    //   setProgress(0);
+    // } else {
+    //   setProgress(progress + 1);
+    // }
+    setProgress(progress + 1);
+  }
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  })
+
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    }
+    const timer = setInterval(tick, 50);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <Background>
