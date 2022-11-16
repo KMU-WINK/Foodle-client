@@ -1,38 +1,123 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ResultText = styled.div`
-    font-family: 'Noto Sans CJK KR';
-    font-weight: 500;
-    font-size: 30px;
-    text-align:center;
+  font-family: "Noto Sans CJK KR";
+  font-weight: 500;
+  font-size: 30px;
+  text-align: center;
 
-    color: #191919;
-`
-
-export const ResultItems = styled.div`
-    margin: 35px 0px 0px 0px;
-    display: flex;
-    justify-content: center;
-`
+  color: #191919;
+`;
 
 export const ResultItem = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 350px;
-    height: 80px;
-    background: #ffffff;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-`
+  display: flex;
+  flex-direction: row;
+  width: 350px;
+  height: 80px;
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+`;
+
+export const ResultItems = styled.div`
+  margin: 35px 0px 0px 0px;
+  & > ${ResultItem}:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+`;
 
 export const ItemRank = styled.div`
-    width: 50px;
-    height: 100%;
-    border-right: solid 1px #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+  border-right: solid 1px #f7f7f7;
 
-`
+  font-family: "Roboto";
+  font-weight: 900;
+  font-size: 30px;
+  color: #005eeb;
+`;
 export const ItemContent = styled.div`
-    width: 330px;
-    height: 100%;
-    border-left: solid 1px #f7f7f7;
-`
+  display: flex;
+  align-items: center;
+  width: 330px;
+  height: 100%;
+  border-left: solid 1px #f7f7f7;
+  padding: 0px 19px 0px 12px;
+
+  justify-content: space-between;
+
+  & > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0px 0px 0px 19px;
+    }
+  }
+
+  & > p:not(:last-of-type) {
+    font-family: "Noto Sans CJK KR";
+    font-weight: 500;
+    font-size: 18px;
+    color: #191919;
+  }
+
+  & > p:last-of-type {
+    font-family: "Noto Sans CJK KR";
+    font-weight: 250;
+    font-size: 14px;
+  }
+`;
+
+export const ButtonAgain = styled.div`
+  cursor: pointer;
+  width: 200px;
+  height: 22px;
+  margin: 55px 0px 0px 0px;
+  padding: 14px 75px 14px 75px;
+  background: #005eeb;
+  border-radius: 50px;
+  text-align: center;
+  color: white;
+  font-family: 'Noto Sans CJK KR'
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+export const ShareButton = styled.div`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: ${(props) => props.bgColor};
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07);
+  border-radius: 30px;
+`;
+
+export const ShareButtons = styled.div`
+  padding: 20px 0px 20px 0px;
+  display: flex;
+
+  & > ${ShareButton}:not(:last-of-type) {
+    margin: 0px 22px 0px 0px;
+  }
+`;
+
+export const PageContainier = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
