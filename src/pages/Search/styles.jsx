@@ -47,7 +47,7 @@ export const Input = styled.input`
     line-height: 21px;
     color: #999999;
 
-    padding: 0px 0px 10px 0px
+    padding: 10px 0px 10px 0px
 `
 
 export const Title = styled.div`
@@ -58,6 +58,8 @@ export const Title = styled.div`
     line-height: 28px;
 
     color: #191919;
+    margin: 30px 0px 0px 0px;
+
 `
 
 
@@ -65,6 +67,12 @@ export const Title = styled.div`
 export const Toggle = styled.img`
 
 `
+
+export const BtnBox = styled.div`
+    display: flex;
+    margin: 10px 0px 10px 0px
+`
+
 
 export const Index = styled.div`
     font-family: 'Noto Sans CJK KR';
@@ -80,8 +88,10 @@ export const Index = styled.div`
 
 export const BtnContent = styled.button`
     background: #ffffff;
-    border: 0.7px solid #999999;
+    border: 0.7px solid ${props => props.borderColor};
     border-radius: 20px;
+
+    cursor: pointer;
 
     font-family: 'Noto Sans CJK KR';
     font-style: normal;
@@ -92,8 +102,9 @@ export const BtnContent = styled.button`
     align-items: center;
     text-align: center;
 
-    color: #999999;
+    color: ${props => props.fontColor};
     padding: 5px 10px 5px 10px;
+    margin: 0px 4px 0px 0px;
 `
 
 export const BtnSearch = styled.button`
@@ -103,6 +114,8 @@ export const BtnSearch = styled.button`
     border: none;
     border-radius: 50px;
     
+    cursor: pointer;
+
     font-family: 'Noto Sans CJK KR';
     font-style: normal;
     font-weight: 500;
