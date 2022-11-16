@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Background,
   EmptyBox,
@@ -12,14 +13,12 @@ import {
 const Loading = () => {
   const [progress, setProgress] = useState(0);
   const savedCallback = useRef();
+  const navigate = useNavigate();
 
   const callback = () => {
-    // Progress 이벤트 loop code
-    // if (progress > 100) {
-    //   setProgress(0);
-    // } else {
-    //   setProgress(progress + 1);
-    // }
+    if (progress > 100) { // 로딩이 완료된 경우
+      navigate('/result');
+    }
     setProgress(progress + 1);
   };
 

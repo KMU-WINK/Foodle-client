@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
 import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
@@ -17,6 +18,11 @@ import {
 } from "./styles";
 
 const Result = () => {
+  const navigate = useNavigate();
+  const searchAgain = () => {
+    navigate("/");
+  };
+
   return (
     <PageContainier>
       <ResultText>
@@ -79,7 +85,7 @@ const Result = () => {
         </ResultItem>
       </ResultItems>
 
-      <ButtonAgain>다시 검색하기</ButtonAgain>
+      <ButtonAgain onClick={searchAgain}>다시 검색하기</ButtonAgain>
       <ShareButtons>
         <ShareButton bgColor="#ffffff">
           <img src={slack} />
