@@ -40,15 +40,27 @@ export const Input = styled.input`
     border-top-width:0;
     border-bottom : 1px solid #191919;
 
+    width: 350px;
     font-family: 'Noto Sans CJK KR';
     font-style: normal;
     font-weight: 350;
     font-size: 14px;
     line-height: 21px;
-    color: #999999;
+    color: #191919;
 
-    padding: 10px 0px 10px 0px
-`
+    padding: 10px 0px 10px 0px;
+
+
+    &:focus {
+        outline: none;
+    };
+
+    &:focus::placeholder {
+        color: transparent;
+    };
+`;
+
+
 
 export const Title = styled.div`
     font-family: 'Noto Sans CJK KR';
@@ -88,7 +100,7 @@ export const Index = styled.div`
 
 export const BtnContent = styled.button`
     background: #ffffff;
-    border: 0.7px solid ${props => props.borderColor};
+    border: 0.7px solid #999999;
     border-radius: 20px;
 
     cursor: pointer;
@@ -102,7 +114,7 @@ export const BtnContent = styled.button`
     align-items: center;
     text-align: center;
 
-    color: ${props => props.fontColor};
+    color: #999999;
     padding: 5px 10px 5px 10px;
     margin: 0px 4px 0px 0px;
 `
@@ -129,4 +141,5 @@ export const BtnSearch = styled.button`
 
     display: flex;
     justify-content: center;
+    margin: 50px 0px 0px 0px;
 `
