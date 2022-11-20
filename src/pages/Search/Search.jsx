@@ -12,7 +12,13 @@ const Search = () => {
         navigate('/');
     };
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [currChecked, setCurrChecked] = useState(0);
+    const [prevChecked, setPrevChecked] = useState(0);
+
+    function click(index) {
+        setPrevChecked(currChecked);
+        setCurrChecked(index);
+    }
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -28,8 +34,9 @@ const Search = () => {
                 <>
                     <Index>국물</Index>
                     <BtnBox>
-                        <BtnContent onClick={()=>setIsChecked(!isChecked)} flag={isChecked}>국물 있음</BtnContent>
-                        <BtnContent onClick={()=>setIsChecked(!isChecked)} flag={isChecked}>국물 없음</BtnContent>
+                        <BtnContent onClick={()=>click(1)} flag={currChecked === 1}>국물 있음</BtnContent>
+                        <BtnContent onClick={()=>click(2)} flag={currChecked === 2}>국물 없음</BtnContent>
+                        <BtnContent onClick={()=>click(3)} flag={currChecked === 3}>상관 없음</BtnContent>
                     </BtnBox>
                 </>
             );
