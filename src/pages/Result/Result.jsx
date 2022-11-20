@@ -18,6 +18,19 @@ import {
 } from "./styles";
 
 const Result = () => {
+  const tempData = [
+    { rank: 1, name: "라면", src: food, rate: 99.8 },
+    { rank: 2, name: "짬뽕", src: food, rate: 90.0 },
+    { rank: 3, name: "마라탕", src: food, rate: 89.7 },
+    { rank: 4, name: "김치찌개", src: food, rate: 86.6 },
+    { rank: 5, name: "부대찌개", src: food, rate: 80.4 },
+    { rank: 6, name: "국물 떡볶이", src: food, rate: 77.1 },
+    { rank: 7, name: "매운 쫄갈비", src: food, rate: 77.0 },
+    { rank: 8, name: "된장찌개", src: food, rate: 76.9 },
+    { rank: 9, name: "김치 콩나물국", src: food, rate: 76.8 },
+    { rank: 10, name: "훠거", src: food, rate: 70.8 },
+  ];
+
   const navigate = useNavigate();
   const searchAgain = () => {
     navigate("/");
@@ -31,60 +44,19 @@ const Result = () => {
         10가지 음식을 준비했어요!
       </ResultText>
       <ResultItems>
-        <ResultItem>
-          <ItemRank>1</ItemRank>
-          <ItemContent>
-            <div>
-              <img src={food} />
-              <p>라면</p>
-            </div>
-            <p>99.8% 일치</p>
-          </ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>2</ItemRank>
-          <ItemContent>
-            <div>
-              <img src={food} />
-              <p>난 라면은 싫은데</p>
-            </div>
-            <p>99.8% 일치</p>
-          </ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>3</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>4</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>5</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>6</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>7</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>8</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>9</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
-        <ResultItem>
-          <ItemRank>10</ItemRank>
-          <ItemContent></ItemContent>
-        </ResultItem>
+        {tempData.map((item) => (
+          <ResultItem>
+            <ItemRank>{item.rank}</ItemRank>
+            <ItemContent>
+              <div>
+                <img src={item.src} />
+                <p>{item.name}</p>
+              </div>
+              <p>{item.rate.toFixed(1)}% 일치</p>
+            </ItemContent>
+          </ResultItem>
+        ))}
       </ResultItems>
-
       <ButtonAgain onClick={searchAgain}>다시 검색하기</ButtonAgain>
       <ShareButtons>
         <ShareButton bgColor="#ffffff">
