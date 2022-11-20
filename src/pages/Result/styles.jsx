@@ -19,13 +19,6 @@ export const ResultItem = styled.div`
   border-radius: 10px;
 `;
 
-export const ResultItems = styled.div`
-  margin: 35px 0px 0px 0px;
-  & > ${ResultItem}:not(:last-of-type) {
-    margin-bottom: 10px;
-  }
-`;
-
 export const ItemRank = styled.div`
   display: flex;
   justify-content: center;
@@ -39,6 +32,7 @@ export const ItemRank = styled.div`
   font-size: 30px;
   color: #005eeb;
 `;
+
 export const ItemContent = styled.div`
   display: flex;
   align-items: center;
@@ -75,6 +69,21 @@ export const ItemContent = styled.div`
     font-family: "Noto Sans CJK KR";
     font-weight: 250;
     font-size: 14px;
+  }
+`;
+
+export const ResultItems = styled.div`
+  margin: 35px 0px 0px 0px;
+  ${ResultItem}:nth-child(-n+3) {
+    ${ItemContent} {
+      & > p:last-of-type {
+        color: #005eeb;
+        font-weight: 400;
+      }
+    }
+  }
+  ${ResultItem}:not(:last-of-type) {
+    margin-bottom: 10px;
   }
 `;
 
