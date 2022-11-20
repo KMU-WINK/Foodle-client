@@ -100,7 +100,7 @@ export const Index = styled.div`
 
 export const BtnContent = styled.button`
     background: #ffffff;
-    border: 0.7px solid #999999;
+    border: 0.7px solid ${props=>(props.flag ? "#999999" : "#005EEB")};
     border-radius: 20px;
 
     cursor: pointer;
@@ -114,7 +114,7 @@ export const BtnContent = styled.button`
     align-items: center;
     text-align: center;
 
-    color: #999999;
+    color: ${props=>(props.flag ? "#999999" : "#005EEB")};
     padding: 5px 10px 5px 10px;
     margin: 0px 4px 0px 0px;
 `
