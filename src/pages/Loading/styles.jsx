@@ -51,14 +51,13 @@ const TextAnimation = keyframes`
 `;
 
 export const LoadingText = styled.div`
-  font-family: "Noto Sans KR";
-  font-weight: 700;
-  font-size: 22px;
-  text-align: center;
-  color: #005eeb;
-
   span {
     display: inline-block;
+    font-family: "Noto Sans KR";
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    color: #005eeb;
     animation: ${TextAnimation} 1.1s infinite alternate;
   }
   span:nth-child(2) {

@@ -54,6 +54,7 @@ export const ItemContent = styled.div`
     align-items: center;
 
     p {
+      font-family: "Noto Sans CJK KR";
       margin: 0px 0px 0px 19px;
     }
   }
@@ -97,7 +98,7 @@ export const ButtonAgain = styled.div`
   border-radius: 50px;
   text-align: center;
   color: white;
-  font-family: 'Noto Sans CJK KR'
+  font-family: "Noto Sans CJK KR";
   font-weight: 500;
   font-size: 18px;
 `;
