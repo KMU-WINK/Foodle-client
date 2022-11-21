@@ -4,6 +4,7 @@ import food from "../../images/test_food.svg";
 import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
+import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
 
 import {
   ButtonAgain,
@@ -21,7 +22,34 @@ import {
   HeightBox,
 } from "./styles";
 
+const Confetti = () => {
+  const count = 160;
+  const defaults = {
+    origin: { y: 0.4 },
+  };
+  const fire = (particleRatio, opts) => {
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio),
+      })
+    );
+  };
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+  fire(0.2, {
+    spread: 60,
+  });
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+};
+
 const ResultCover = () => {
+  window.onload = Confetti();
   return (
     <CoverContainer>
       <HeightBox />
