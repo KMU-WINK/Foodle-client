@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
 import slack from "../../images/ic_slack.svg";
@@ -68,6 +68,12 @@ const ResultCover = () => {
 };
 
 const Result = () => {
+  useEffect(() => {
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
+  }, []);
+
   const tempData = [
     { rank: 1, name: "라면", src: food, rate: 99.8 },
     { rank: 2, name: "짬뽕", src: food, rate: 90.0 },
