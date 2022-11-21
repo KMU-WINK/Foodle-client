@@ -49,7 +49,6 @@ const Confetti = () => {
 };
 
 const ResultCover = () => {
-  window.onload = Confetti();
   return (
     <CoverContainer>
       <HeightBox />
@@ -72,6 +71,7 @@ const Result = () => {
     window.onbeforeunload = function pushRefresh() {
       window.scrollTo(0, 0);
     };
+    Confetti();
   }, []);
 
   const tempData = [
