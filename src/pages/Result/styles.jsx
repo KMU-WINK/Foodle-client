@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { keyframes } from "styled-components";
+import arrow from "../../images/ic_up_arrow.svg";
 
 export const ResultText = styled.div`
   font-family: "Noto Sans CJK KR";
@@ -130,4 +132,52 @@ export const PageContainier = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const CoverContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const FadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const UpArrow = styled.img.attrs({
+  src: `${arrow}`,
+})`
+  width: 20px;
+  height: 12.67px;
+  opacity: ${(props) => props.opacity || 1};
+`;
+
+export const Arrows = styled.div`
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  ${UpArrow} {
+    animation: ${FadeOut} 1.2s infinite alternate;
+  }
+  ${UpArrow}:nth-child(1) {
+    animation-delay: 1.2s;
+  }
+  ${UpArrow}:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+  ${UpArrow}:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+`;
+
+export const HeightBox = styled.div`
+  height: 60px;
 `;

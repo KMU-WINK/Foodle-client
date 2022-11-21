@@ -15,7 +15,29 @@ import {
   ResultText,
   ShareButtons,
   ShareButton,
+  CoverContainer,
+  UpArrow,
+  Arrows,
+  HeightBox,
 } from "./styles";
+
+const ResultCover = () => {
+  return (
+    <CoverContainer>
+      <HeightBox />
+      <ResultText>
+        📢 <br />
+        Foodle이 당신을 위해 <br />
+        10가지 음식을 준비했어요!
+      </ResultText>
+      <Arrows>
+        <UpArrow opacity="0.2" />
+        <UpArrow opacity="0.5" />
+        <UpArrow />
+      </Arrows>
+    </CoverContainer>
+  );
+};
 
 const Result = () => {
   const tempData = [
@@ -38,11 +60,7 @@ const Result = () => {
 
   return (
     <PageContainier>
-      <ResultText>
-        📢 <br />
-        Foodle이 당신을 위해 <br />
-        10가지 음식을 준비했어요!
-      </ResultText>
+      <ResultCover />
       <ResultItems>
         {tempData.map((item) => (
           <ResultItem>
