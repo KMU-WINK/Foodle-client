@@ -164,6 +164,7 @@ export const Arrows = styled.div`
   height: 60px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   ${UpArrow} {
     animation: ${FadeOut} 1.2s infinite alternate;
   }

@@ -49,6 +49,51 @@ const Confetti = () => {
 };
 
 const ResultCover = () => {
+  // left: 37, up: 38, right: 39, down: 40,
+  // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+  const keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+  const wheelEvent =
+    "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+  const preventDefault = (e) => {
+    e.preventDefault();
+  }
+
+  const preventDefaultForScrollKeys = (e) => {
+    if (keys[e.keyCode]) {
+      preventDefault(e);
+      return false;
+    }
+  }
+
+  const disableScroll = () => {
+    window.addEventListener(wheelEvent, preventDefault, { passive: false }); // 데스크탑 환경
+    window.addEventListener("touchmove", preventDefault, { passive: false }); // 모바일 환경
+    window.addEventListener("keydown", preventDefaultForScrollKeys, {
+      passive: false,
+    });
+  }
+
+  // call this to Enable
+  const enableScroll = () => {
+    window.removeEventListener(wheelEvent, preventDefault, { passive: false });
+    window.removeEventListener("touchmove", preventDefault, { passive: false });
+    window.removeEventListener("keydown", preventDefaultForScrollKeys, {
+      passive: false,
+    });
+  }
+
+  const scrollDown = () => {
+    disableScroll();
+    window.scrollTo({
+      top: 800,
+      behavior: "smooth",
+    });
+    setTimeout(1000);
+    enableScroll();
+    return 0;
+  }
+
   return (
     <CoverContainer>
       <HeightBox />
@@ -57,7 +102,7 @@ const ResultCover = () => {
         Foodle이 당신을 위해 <br />
         10가지 음식을 준비했어요!
       </ResultText>
-      <Arrows>
+      <Arrows onClick={scrollDown}>
         <UpArrow opacity="0.2" />
         <UpArrow opacity="0.5" />
         <UpArrow />
