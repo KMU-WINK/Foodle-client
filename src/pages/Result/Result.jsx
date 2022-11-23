@@ -57,14 +57,14 @@ const ResultCover = () => {
 
   const preventDefault = (e) => {
     e.preventDefault();
-  }
+  };
 
   const preventDefaultForScrollKeys = (e) => {
     if (keys[e.keyCode]) {
       preventDefault(e);
       return false;
     }
-  }
+  };
 
   const disableScroll = () => {
     window.addEventListener(wheelEvent, preventDefault, { passive: false }); // 데스크탑 환경
@@ -72,7 +72,7 @@ const ResultCover = () => {
     window.addEventListener("keydown", preventDefaultForScrollKeys, {
       passive: false,
     });
-  }
+  };
 
   // call this to Enable
   const enableScroll = () => {
@@ -81,7 +81,7 @@ const ResultCover = () => {
     window.removeEventListener("keydown", preventDefaultForScrollKeys, {
       passive: false,
     });
-  }
+  };
 
   const scrollDown = () => {
     disableScroll();
@@ -89,10 +89,9 @@ const ResultCover = () => {
       top: 800,
       behavior: "smooth",
     });
-    setTimeout(1000);
     enableScroll();
     return 0;
-  }
+  };
 
   return (
     <CoverContainer>
