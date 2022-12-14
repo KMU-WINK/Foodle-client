@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
 import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
-
+import Modal from "../../components/Modal/Modal";
 import {
   ButtonAgain,
   ItemContent,
@@ -135,6 +135,12 @@ const Result = () => {
   const searchAgain = () => {
     navigate("/");
   };
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(0);
+  const showModal = (type) => {
+    setModalOpen(true);
+    setModalType(type);
+  };
 
   return (
     <PageContainier>
@@ -155,16 +161,27 @@ const Result = () => {
       </ResultItems>
       <ButtonAgain onClick={searchAgain}>다시 검색하기</ButtonAgain>
       <ShareButtons>
-        <ShareButton bgColor="#ffffff">
+        <ShareButton
+          bgColor="#ffffff"
+          onClick={() => {
+            showModal(0);
+          }}
+        >
           <img src={slack} />
         </ShareButton>
-        <ShareButton bgColor="#F7E569">
+        <ShareButton
+          bgColor="#F7E569"
+          onClick={() => {
+            showModal(1);
+          }}
+        >
           <img src={kakao} />
         </ShareButton>
         <ShareButton bgColor="#8D9BCE">
           <img src={link} />
         </ShareButton>
       </ShareButtons>
+      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType }} />}
     </PageContainier>
   );
 };
