@@ -32,6 +32,15 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
   }
+  
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default GlobalStyle;
