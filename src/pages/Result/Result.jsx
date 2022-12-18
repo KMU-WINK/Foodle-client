@@ -6,6 +6,7 @@ import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
 import Modal from "../../components/Modal/Modal";
+import Toast from "../../components/Toast/Toast";
 import {
   ButtonAgain,
   ItemContent,
@@ -21,6 +22,7 @@ import {
   Arrows,
   HeightBox,
 } from "./styles";
+
 
 const Confetti = () => {
   const count = 160;
@@ -137,6 +139,7 @@ const Result = () => {
   };
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const showModal = (type) => {
     setModalOpen(true);
     setModalType(type);
@@ -159,6 +162,11 @@ const Result = () => {
           </ResultItem>
         ))}
       </ResultItems>
+      <Toast
+        isActive={isActive}
+        setIsActive={setIsActive}
+        message="링크가 복사되었습니다."
+      />
       <ButtonAgain onClick={searchAgain}>다시 검색하기</ButtonAgain>
       <ShareButtons>
         <ShareButton
@@ -177,7 +185,13 @@ const Result = () => {
         >
           <img src={kakao} />
         </ShareButton>
-        <ShareButton bgColor="#8D9BCE">
+        <ShareButton
+          bgColor="#8D9BCE"
+          onClick={() => {
+            setIsActive(true);
+            console.log(isActive);
+          }}
+        >
           <img src={link} />
         </ShareButton>
       </ShareButtons>
