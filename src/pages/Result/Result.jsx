@@ -141,6 +141,7 @@ const Result = () => {
   const [modalType, setModalType] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const showModal = (type) => {
+    setIsActive(false);
     setModalOpen(true);
     setModalType(type);
   };
