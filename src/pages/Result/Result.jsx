@@ -135,7 +135,7 @@ const Result = () => {
 
   const navigate = useNavigate();
   const searchAgain = () => {
-    navigate("/");
+    navigate("/search");
   };
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);

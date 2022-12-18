@@ -19,6 +19,11 @@ const Search = () => {
   const GotoMain = () => {
     navigate("/");
   };
+  
+  const FindFood = () => {
+    // 선택된 정보로 서버에 쿼리 요청
+    navigate("/loading");
+  }
 
   //  카테고리_국물 라디오 버튼
   const [currCheckedSoup, setCurrCheckedSoup] = useState(0);
@@ -110,7 +115,7 @@ const Search = () => {
         <Input placeholder="ex. 떡볶이" />
         <Title onClick={() => toggleOpen()}>카테고리</Title>
         <Category isOpen={isOpen} />
-        <BtnSearch>검색하기</BtnSearch>
+        <BtnSearch onClick={FindFood}>검색하기</BtnSearch>
       </Box1>
     </FlexBox>
   );
