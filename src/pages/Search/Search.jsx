@@ -116,6 +116,7 @@ const Search = () => {
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState(wholeTextArray);
   const [dropDownIndex, setDropDownIndex] = useState(-1);
+  const [isFocus, setIsFocus] = useState(false);
 
   const showDropDownList = () => {
     if (inputValue == "") {
@@ -154,11 +155,13 @@ const Search = () => {
           type="text"
           value={inputValue}
           onChange={changeInputValue}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
           placeholder="ex. 떡볶이"
         />
         {isHaveInputValue && (
           <DropDownBox>
-            {dropDownList.length === 0 && (
+            {isFocus && dropDownList.length === 0 && (
               <DropDownItem>해당 음식을 찾을 수 없어요</DropDownItem>
             )}
             {dropDownList.map((item, index) => {
@@ -170,7 +173,7 @@ const Search = () => {
                 >
                   {item}
                 </DropDownItem>
-              )
+              );
             })}
           </DropDownBox>
         )}
