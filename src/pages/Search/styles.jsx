@@ -145,7 +145,6 @@ export const DropDownItem = styled.div`
   align-items: center;
   padding: 0px 20px;
   :hover {
-    background-color: #E8E8F8;
+    background-color: ${(props) => (props.noneItem ? "#FFFFFF" : "#E8E8F8")};
   }
-
 `;
