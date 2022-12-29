@@ -15,12 +15,11 @@ export const Logo = styled.div`
   font-style: normal;
   font-weight: 900;
   font-size: 30px;
-  line-height: 44px;
   display: flex;
   align-items: center;
   text-align: center;
   color: #005eeb;
-  margin: 0px 0px 30px 0px;
+  margin: 40px 0px 30px 0px;
 `;
 
 export const TitleWant = styled.div`
@@ -50,6 +49,7 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
+    border-bottom: 1px solid #005EEB;
   }
 
   &:focus::placeholder {
