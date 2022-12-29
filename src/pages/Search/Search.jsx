@@ -161,8 +161,8 @@ const Search = () => {
         />
         {isHaveInputValue && (
           <DropDownBox>
-            {isFocus && dropDownList.length === 0 && (
-              <DropDownItem>해당 음식을 찾을 수 없어요</DropDownItem>
+            {dropDownList.length === 0 && (
+              <DropDownItem onClick={() => setIsFocus(false)}>해당 음식을 찾을 수 없어요</DropDownItem>
             )}
             {dropDownList.map((item, index) => {
               return (
