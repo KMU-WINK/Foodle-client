@@ -140,7 +140,7 @@ const Result = () => {
       <ResultCover />
       <styled.ResultItems>
         {tempData.map((item) => (
-          <styled.ResultItem>
+          <styled.ResultItem key={item.rank}>
             <styled.ItemRank>{item.rank}</styled.ItemRank>
             <styled.ItemContent>
               <div>

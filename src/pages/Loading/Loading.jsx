@@ -28,19 +28,19 @@ const Loading = () => {
   }, []);
 
   const loadingTextList = [
-    "L",
-    "O",
-    "A",
-    "D",
-    "I",
-    "N",
-    "G",
-    " ",
-    ".",
-    ".",
-    ".",
+    { id: 0, text: "L"},
+    { id: 1, text: "O"},
+    { id: 2, text: "A"},
+    { id: 3, text: "D"},
+    { id: 4, text: "I"},
+    { id: 5, text: "N"},
+    { id: 6, text: "G"},
+    { id: 7, text: " "},
+    { id: 8, text: "."},
+    { id: 9, text: "."},
+    { id: 10, text: "."},
   ];
-  const loadingText = loadingTextList.map((text) => <span>{text}</span>);
+  const loadingText = loadingTextList.map((text) => <span key={text.id}>{text.text}</span>);
 
   return (
     <styled.Background>

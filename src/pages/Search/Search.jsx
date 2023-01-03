@@ -63,6 +63,7 @@ const Search = () => {
           <styled.BtnBox>
             {categorySoup.map((soup) => (
               <styled.BtnContent
+                key={soup.index}
                 onClick={() => ClickSoup(soup.index)}
                 flag={currCheckedSoup === soup.index}
               >
@@ -74,6 +75,7 @@ const Search = () => {
           <styled.BtnBox>
             {categoryNation.map((nation) => (
               <styled.BtnContent
+                key={nation.index}
                 onClick={() => ClickNation(nation.index)}
                 flag={checkedNation.includes(nation.index)}
               >
@@ -149,7 +151,10 @@ const Search = () => {
         {isHaveInputValue && (
           <styled.DropDownBox>
             {dropDownList.length === 0 && (
-              <styled.DropDownItem noneItem={true} onClick={() => setIsFocus(false)}>
+              <styled.DropDownItem
+                noneItem={true}
+                onClick={() => setIsFocus(false)}
+              >
                 해당 음식을 찾을 수 없어요
               </styled.DropDownItem>
             )}
