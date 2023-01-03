@@ -144,6 +144,10 @@ const Result = () => {
     setModalOpen(true);
     setModalType(type);
   };
+  const copyClipBoard = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    setIsActive(true);
+  };
 
   return (
     <PageContainier>
@@ -190,6 +194,7 @@ const Result = () => {
           onClick={() => {
             setIsActive(true);
             console.log(isActive);
+            copyClipBoard();
           }}
         >
           <img src={link} />
