@@ -7,21 +7,7 @@ import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
 import Modal from "../../components/Modal/Modal";
 import Toast from "../../components/Toast/Toast";
-import {
-  ButtonAgain,
-  ItemContent,
-  ItemRank,
-  PageContainier,
-  ResultItem,
-  ResultItems,
-  ResultText,
-  ShareButtons,
-  ShareButton,
-  CoverContainer,
-  UpArrow,
-  Arrows,
-  HeightBox,
-} from "./styles";
+import * as styled from "./styles";
 
 const Confetti = () => {
   const count = 160;
@@ -95,19 +81,19 @@ const ResultCover = () => {
   };
 
   return (
-    <CoverContainer>
-      <HeightBox />
-      <ResultText>
+    <styled.CoverContainer>
+      <styled.HeightBox />
+      <styled.ResultText>
         📢 <br />
         Foodle이 당신을 위해 <br />
         10가지 음식을 준비했어요!
-      </ResultText>
-      <Arrows onClick={scrollDown}>
-        <UpArrow opacity="0.2" />
-        <UpArrow opacity="0.5" />
-        <UpArrow />
-      </Arrows>
-    </CoverContainer>
+      </styled.ResultText>
+      <styled.Arrows onClick={scrollDown}>
+        <styled.UpArrow opacity="0.2" />
+        <styled.UpArrow opacity="0.5" />
+        <styled.UpArrow />
+      </styled.Arrows>
+    </styled.CoverContainer>
   );
 };
 
@@ -150,46 +136,46 @@ const Result = () => {
   };
 
   return (
-    <PageContainier>
+    <styled.PageContainier>
       <ResultCover />
-      <ResultItems>
+      <styled.ResultItems>
         {tempData.map((item) => (
-          <ResultItem>
-            <ItemRank>{item.rank}</ItemRank>
-            <ItemContent>
+          <styled.ResultItem>
+            <styled.ItemRank>{item.rank}</styled.ItemRank>
+            <styled.ItemContent>
               <div>
                 <img src={item.src} />
                 <p>{item.name}</p>
               </div>
               <p>{item.rate.toFixed(1)}% 일치</p>
-            </ItemContent>
-          </ResultItem>
+            </styled.ItemContent>
+          </styled.ResultItem>
         ))}
-      </ResultItems>
+      </styled.ResultItems>
       <Toast
         isActive={isActive}
         setIsActive={setIsActive}
         message="링크가 복사되었습니다."
       />
-      <ButtonAgain onClick={searchAgain}>다시 검색하기</ButtonAgain>
-      <ShareButtons>
-        <ShareButton
+      <styled.ButtonAgain onClick={searchAgain}>다시 검색하기</styled.ButtonAgain>
+      <styled.ShareButtons>
+        <styled.ShareButton
           bgColor="#ffffff"
           onClick={() => {
             showModal(0);
           }}
         >
           <img src={slack} />
-        </ShareButton>
-        <ShareButton
+        </styled.ShareButton>
+        <styled.ShareButton
           bgColor="#F7E569"
           onClick={() => {
             showModal(1);
           }}
         >
           <img src={kakao} />
-        </ShareButton>
-        <ShareButton
+        </styled.ShareButton>
+        <styled.ShareButton
           bgColor="#8D9BCE"
           onClick={() => {
             setIsActive(true);
@@ -198,10 +184,10 @@ const Result = () => {
           }}
         >
           <img src={link} />
-        </ShareButton>
-      </ShareButtons>
+        </styled.ShareButton>
+      </styled.ShareButtons>
       {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType }} />}
-    </PageContainier>
+    </styled.PageContainier>
   );
 };
 

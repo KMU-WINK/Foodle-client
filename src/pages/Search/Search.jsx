@@ -1,18 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box1,
-  BtnContent,
-  BtnSearch,
-  FlexBox,
-  Index,
-  Input,
-  Logo,
-  TitleWant,
-  Title,
-  BtnBox,
-  DropDownItem,
-  DropDownBox,
-} from "./styles";
+import * as styled from "./styles";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -72,28 +59,28 @@ const Search = () => {
     if (isOpen) {
       return (
         <>
-          <Index>국물</Index>
-          <BtnBox>
+          <styled.Index>국물</styled.Index>
+          <styled.BtnBox>
             {categorySoup.map((soup) => (
-              <BtnContent
+              <styled.BtnContent
                 onClick={() => ClickSoup(soup.index)}
                 flag={currCheckedSoup === soup.index}
               >
                 {soup.content}
-              </BtnContent>
+              </styled.BtnContent>
             ))}
-          </BtnBox>
-          <Index>나라</Index>
-          <BtnBox>
+          </styled.BtnBox>
+          <styled.Index>나라</styled.Index>
+          <styled.BtnBox>
             {categoryNation.map((nation) => (
-              <BtnContent
+              <styled.BtnContent
                 onClick={() => ClickNation(nation.index)}
                 flag={checkedNation.includes(nation.index)}
               >
                 {nation.content}
-              </BtnContent>
+              </styled.BtnContent>
             ))}
-          </BtnBox>
+          </styled.BtnBox>
         </>
       );
     }
@@ -144,14 +131,14 @@ const Search = () => {
   useEffect(showDropDownList, [inputValue]);
 
   return (
-    <FlexBox>
-      <Box1>
-        <Logo onClick={GotoMain}>FOODLE</Logo>
-        <TitleWant fontWeight="500">어떤 느낌의</TitleWant>
-        <TitleWant fontWeight="400">음식을 원하세요?</TitleWant>
-        <Input placeholder="ex. 약간 맵고 달달한 음식"></Input>
-        <Title>먹기 싫은 음식</Title>
-        <Input
+    <styled.FlexBox>
+      <styled.Box1>
+        <styled.Logo onClick={GotoMain}>FOODLE</styled.Logo>
+        <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
+        <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
+        <styled.Input placeholder="ex. 약간 맵고 달달한 음식"></styled.Input>
+        <styled.Title>먹기 싫은 음식</styled.Title>
+        <styled.Input
           type="text"
           value={inputValue}
           onChange={changeInputValue}
@@ -160,30 +147,30 @@ const Search = () => {
           placeholder="ex. 떡볶이"
         />
         {isHaveInputValue && (
-          <DropDownBox>
+          <styled.DropDownBox>
             {dropDownList.length === 0 && (
-              <DropDownItem noneItem={true} onClick={() => setIsFocus(false)}>
+              <styled.DropDownItem noneItem={true} onClick={() => setIsFocus(false)}>
                 해당 음식을 찾을 수 없어요
-              </DropDownItem>
+              </styled.DropDownItem>
             )}
             {dropDownList.map((item, index) => {
               return (
-                <DropDownItem
+                <styled.DropDownItem
                   key={index}
                   onClick={() => clickDropDownItem(item)}
                   focus={dropDownIndex == index}
                 >
                   {item}
-                </DropDownItem>
+                </styled.DropDownItem>
               );
             })}
-          </DropDownBox>
+          </styled.DropDownBox>
         )}
-        <Title onClick={() => toggleOpen()}>카테고리</Title>
+        <styled.Title onClick={() => toggleOpen()}>카테고리</styled.Title>
         <Category isOpen={isOpen} />
-        <BtnSearch onClick={FindFood}>검색하기</BtnSearch>
-      </Box1>
-    </FlexBox>
+        <styled.BtnSearch onClick={FindFood}>검색하기</styled.BtnSearch>
+      </styled.Box1>
+    </styled.FlexBox>
   );
 };
 

@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Background,
-  EmptyBox,
-  FilledBox,
-  ProgressEmpty,
-  ProgressFilled,
-  LoadingImage,
-  LoadingText,
-} from "./styles";
+import * as styled from "./styles";
 
 const Loading = () => {
   const [progress, setProgress] = useState(0);
@@ -51,17 +43,17 @@ const Loading = () => {
   const loadingText = loadingTextList.map((text) => <span>{text}</span>);
 
   return (
-    <Background>
-      <LoadingImage>
-        <FilledBox progress={progress}>
-          <ProgressFilled />
-        </FilledBox>
-        <EmptyBox>
-          <ProgressEmpty />
-        </EmptyBox>
-      </LoadingImage>
-      <LoadingText>{loadingText}</LoadingText>
-    </Background>
+    <styled.Background>
+      <styled.LoadingImage>
+        <styled.FilledBox progress={progress}>
+          <styled.ProgressFilled />
+        </styled.FilledBox>
+        <styled.EmptyBox>
+          <styled.ProgressEmpty />
+        </styled.EmptyBox>
+      </styled.LoadingImage>
+      <styled.LoadingText>{loadingText}</styled.LoadingText>
+    </styled.Background>
   );
 };
 
