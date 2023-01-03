@@ -1,16 +1,5 @@
-import React, { useState } from "react";
-import {
-  Box1,
-  BtnContent,
-  BtnSearch,
-  FlexBox,
-  Index,
-  Input,
-  Logo,
-  TitleWant,
-  Title,
-  BtnBox,
-} from "./styles";
+import React, { useEffect, useState } from "react";
+import * as styled from "./styles";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -19,11 +8,11 @@ const Search = () => {
   const GotoMain = () => {
     navigate("/");
   };
-  
+
   const FindFood = () => {
     // 선택된 정보로 서버에 쿼리 요청
     navigate("/loading");
-  }
+  };
 
   //  카테고리_국물 라디오 버튼
   const [currCheckedSoup, setCurrCheckedSoup] = useState(0);
@@ -40,19 +29,15 @@ const Search = () => {
     { index: 3, content: "상관 없음" },
   ];
 
-
   const [checkedNation, setCheckedNation] = useState([]);
-  
+
   function ClickNation(index) {
-      
-    if (checkedNation.includes(index)){
-        const deletedArray = checkedNation.filter(number => number != index);
-        setCheckedNation(checkedNation => deletedArray);
+    if (checkedNation.includes(index)) {
+      const deletedArray = checkedNation.filter((number) => number != index);
+      setCheckedNation((checkedNation) => deletedArray);
     } else {
-        setCheckedNation(checkedNation => [...checkedNation, index]);
+      setCheckedNation((checkedNation) => [...checkedNation, index]);
     }
-
-
   }
 
   const categoryNation = [
@@ -68,56 +53,129 @@ const Search = () => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-
-
   function Category(props) {
     const isOpen = props.isOpen;
 
     if (isOpen) {
       return (
         <>
-          <Index>국물</Index>
-          <BtnBox>
+          <styled.Index>국물</styled.Index>
+          <styled.BtnBox>
             {categorySoup.map((soup) => (
-              <BtnContent
+              <styled.BtnContent
+                key={soup.index}
                 onClick={() => ClickSoup(soup.index)}
                 flag={currCheckedSoup === soup.index}
               >
                 {soup.content}
-              </BtnContent>
+              </styled.BtnContent>
             ))}
-          </BtnBox>
-          <Index>나라</Index>
-            <BtnBox>
+          </styled.BtnBox>
+          <styled.Index>나라</styled.Index>
+          <styled.BtnBox>
             {categoryNation.map((nation) => (
-                <BtnContent
-                    onClick={() => ClickNation(nation.index)}
-                    flag={checkedNation.includes(nation.index)}
-                >
-                    {nation.content}
-                </BtnContent>
+              <styled.BtnContent
+                key={nation.index}
+                onClick={() => ClickNation(nation.index)}
+                flag={checkedNation.includes(nation.index)}
+              >
+                {nation.content}
+              </styled.BtnContent>
             ))}
-            </BtnBox>
-
+          </styled.BtnBox>
         </>
       );
     }
   }
 
+  const wholeTextArray = [
+    "치킨",
+    "피자",
+    "핫도그",
+    "순댓국",
+    "햄버거",
+    "샌드위치",
+    "돈까스",
+    "닭갈비",
+    "팝콘",
+    "감자탕",
+  ];
+
+  const [inputValue, setInputValue] = useState("");
+  const [isHaveInputValue, setIsHaveInputValue] = useState(false);
+  const [dropDownList, setDropDownList] = useState(wholeTextArray);
+  const [dropDownIndex, setDropDownIndex] = useState(-1);
+  const [isFocus, setIsFocus] = useState(false);
+
+  const showDropDownList = () => {
+    if (inputValue == "") {
+      setIsHaveInputValue(false);
+      setDropDownList([]);
+    } else {
+      // 해당 코드를 서버에 query를 보내는 형식으로 변경해야 합니다.
+      const findResult = wholeTextArray.filter((item) =>
+        item.includes(inputValue)
+      );
+      setDropDownList(findResult);
+    }
+  };
+
+  const changeInputValue = (event) => {
+    setInputValue(event.target.value);
+    setIsHaveInputValue(true);
+  };
+
+  const clickDropDownItem = (clickedItem) => {
+    setInputValue(clickedItem);
+    setIsHaveInputValue(false);
+  };
+
+  useEffect(showDropDownList, [inputValue]);
+
   return (
-    <FlexBox>
-      <Box1>
-        <Logo onClick={GotoMain}>FOODLE</Logo>
-        <TitleWant fontWeight="500">어떤 느낌의</TitleWant>
-        <TitleWant fontWeight="400">음식을 원하세요?</TitleWant>
-        <Input placeholder="ex. 약간 맵고 달달한 음식"></Input>
-        <Title>먹기 싫은 음식</Title>
-        <Input placeholder="ex. 떡볶이" />
-        <Title onClick={() => toggleOpen()}>카테고리</Title>
+    <styled.FlexBox>
+      <styled.Box1>
+        <styled.Logo onClick={GotoMain}>FOODLE</styled.Logo>
+        <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
+        <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
+        <styled.Input placeholder="ex. 약간 맵고 달달한 음식"></styled.Input>
+        <styled.Title>먹기 싫은 음식</styled.Title>
+        <styled.Input
+          type="text"
+          value={inputValue}
+          onChange={changeInputValue}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          placeholder="ex. 떡볶이"
+        />
+        {isHaveInputValue && (
+          <styled.DropDownBox>
+            {dropDownList.length === 0 && (
+              <styled.DropDownItem
+                noneItem={true}
+                onClick={() => setIsFocus(false)}
+              >
+                해당 음식을 찾을 수 없어요
+              </styled.DropDownItem>
+            )}
+            {dropDownList.map((item, index) => {
+              return (
+                <styled.DropDownItem
+                  key={index}
+                  onClick={() => clickDropDownItem(item)}
+                  focus={dropDownIndex == index}
+                >
+                  {item}
+                </styled.DropDownItem>
+              );
+            })}
+          </styled.DropDownBox>
+        )}
+        <styled.Title onClick={() => toggleOpen()}>카테고리</styled.Title>
         <Category isOpen={isOpen} />
-        <BtnSearch onClick={FindFood}>검색하기</BtnSearch>
-      </Box1>
-    </FlexBox>
+        <styled.BtnSearch onClick={FindFood}>검색하기</styled.BtnSearch>
+      </styled.Box1>
+    </styled.FlexBox>
   );
 };
 

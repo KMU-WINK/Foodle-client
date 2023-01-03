@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Background,
-  EmptyBox,
-  FilledBox,
-  ProgressEmpty,
-  ProgressFilled,
-  LoadingImage,
-  LoadingText,
-} from "./styles";
+import * as styled from "./styles";
 
 const Loading = () => {
   const [progress, setProgress] = useState(0);
@@ -16,8 +8,9 @@ const Loading = () => {
   const navigate = useNavigate();
 
   const callback = () => {
-    if (progress > 100) { // 로딩이 완료된 경우
-      navigate('/result');
+    if (progress > 100) {
+      // 로딩이 완료된 경우
+      navigate("/result");
     }
     setProgress(progress + 1);
   };
@@ -34,21 +27,33 @@ const Loading = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const loadingTextList = ["L", "O", "A", "D", "I", "N", "G", " ", ".", ".", "."];
-  const loadingText = loadingTextList.map((text) => <span>{text}</span>);
+  const loadingTextList = [
+    { id: 0, text: "L"},
+    { id: 1, text: "O"},
+    { id: 2, text: "A"},
+    { id: 3, text: "D"},
+    { id: 4, text: "I"},
+    { id: 5, text: "N"},
+    { id: 6, text: "G"},
+    { id: 7, text: " "},
+    { id: 8, text: "."},
+    { id: 9, text: "."},
+    { id: 10, text: "."},
+  ];
+  const loadingText = loadingTextList.map((text) => <span key={text.id}>{text.text}</span>);
 
   return (
-    <Background>
-      <LoadingImage>
-        <FilledBox progress={progress}>
-          <ProgressFilled />
-        </FilledBox>
-        <EmptyBox>
-          <ProgressEmpty />
-        </EmptyBox>
-      </LoadingImage>
-      <LoadingText>{loadingText}</LoadingText>
-    </Background>
+    <styled.Background>
+      <styled.LoadingImage>
+        <styled.FilledBox progress={progress}>
+          <styled.ProgressFilled />
+        </styled.FilledBox>
+        <styled.EmptyBox>
+          <styled.ProgressEmpty />
+        </styled.EmptyBox>
+      </styled.LoadingImage>
+      <styled.LoadingText>{loadingText}</styled.LoadingText>
+    </styled.Background>
   );
 };
 

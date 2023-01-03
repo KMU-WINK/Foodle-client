@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { shareKakao } from "../../utils/shareKaKaoLink";
 import {
   FlexBox,
   ModalBackground,
@@ -14,6 +15,14 @@ const modalData = [
 
 const Modal = ({ ModalInfo }) => {
   useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
+  useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
       top: -${window.scrollY}px;
@@ -21,8 +30,8 @@ const Modal = ({ ModalInfo }) => {
       width: 100%;`;
     return () => {
       const scrollY = document.body.style.top;
-      document.body.style.cssText = '';
-      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      document.body.style.cssText = "";
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     };
   }, []);
 
@@ -37,6 +46,9 @@ const Modal = ({ ModalInfo }) => {
             background="#005eeb"
             color="#ffffff"
             onClick={() => {
+              if (modalData[ModalInfo.modalType].text == "카카오톡") {
+                shareKakao(`http://localhost:5173/result`, "Foodle");
+              }
               ModalInfo.setModalOpen(false);
             }}
           >
