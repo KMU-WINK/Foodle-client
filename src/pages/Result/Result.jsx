@@ -23,7 +23,6 @@ import {
   HeightBox,
 } from "./styles";
 
-
 const Confetti = () => {
   const count = 160;
   const defaults = {

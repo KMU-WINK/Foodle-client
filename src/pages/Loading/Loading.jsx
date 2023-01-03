@@ -16,8 +16,9 @@ const Loading = () => {
   const navigate = useNavigate();
 
   const callback = () => {
-    if (progress > 100) { // 로딩이 완료된 경우
-      navigate('/result');
+    if (progress > 100) {
+      // 로딩이 완료된 경우
+      navigate("/result");
     }
     setProgress(progress + 1);
   };
@@ -34,7 +35,19 @@ const Loading = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const loadingTextList = ["L", "O", "A", "D", "I", "N", "G", " ", ".", ".", "."];
+  const loadingTextList = [
+    "L",
+    "O",
+    "A",
+    "D",
+    "I",
+    "N",
+    "G",
+    " ",
+    ".",
+    ".",
+    ".",
+  ];
   const loadingText = loadingTextList.map((text) => <span>{text}</span>);
 
   return (

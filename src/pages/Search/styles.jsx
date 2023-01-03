@@ -49,7 +49,7 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-bottom: 1px solid #005EEB;
+    border-bottom: 1px solid #005eeb;
   }
 
   &:focus::placeholder {
