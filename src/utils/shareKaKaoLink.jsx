@@ -1,5 +1,4 @@
-export const shareKakao = (route, title) => {
-  // url이 id값에 따라 변경되기 때문에 route를 인자값으로 받아줌
+export const shareKakao = (route, title, keyword) => {
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
@@ -7,19 +6,19 @@ export const shareKakao = (route, title) => {
     }
 
     kakao.Link.sendDefault({
-      objectType: "feed", // 카카오 링크 공유 여러 type들 중 feed라는 타입 -> 자세한 건 카카오에서 확인
+      objectType: "feed",
       content: {
-        title: title, // 인자값으로 받은 title
-        description: "설명", // 인자값으로 받은 title
+        title: title,
+        description: `🍳 Foodle이 '${keyword}'으로 10가지의 요리를 준비했어요!`,
         imageUrl: "../images/test_food.svg",
         link: {
-          mobileWebUrl: route, // 인자값으로 받은 route(uri 형태)
+          mobileWebUrl: route,
           webUrl: route,
         },
       },
       buttons: [
         {
-          title: "title",
+          title: "결과 확인하기",
           link: {
             mobileWebUrl: route,
             webUrl: route,
