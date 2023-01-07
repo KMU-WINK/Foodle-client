@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Box1 = styled.div`
   width: 390px;
   padding: 0px 20px 0px 20px;
+  margin-bottom: 100px;
 `;
 
 export const FlexBox = styled.div`
@@ -20,6 +21,7 @@ export const Logo = styled.div`
   text-align: center;
   color: #005eeb;
   margin: 40px 0px 30px 0px;
+  cursor: pointer;
 `;
 
 export const TitleWant = styled.div`
@@ -68,54 +70,15 @@ export const Title = styled.div`
   margin: 30px 0px 0px 0px;
 `;
 
-export const Toggle = styled.img``;
-
-export const BtnBox = styled.div`
-  display: flex;
-  margin: 10px 0px 10px 0px;
-`;
-
-export const Index = styled.div`
-  font-family: "Noto Sans CJK KR";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  /* identical to box height */
-
-  color: #191919;
-`;
-
-export const BtnContent = styled.button`
-  background: #ffffff;
-  border: 0.7px solid ${(props) => (props.flag ? "#005EEB" : "#999999")};
-  border-radius: 20px;
-
-  cursor: pointer;
-
-  font-family: "Noto Sans CJK KR";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  color: ${(props) => (props.flag ? "#005EEB" : "#999999")};
-  padding: 5px 10px 5px 10px;
-  margin: 0px 4px 0px 0px;
-`;
-
 export const BtnSearch = styled.button`
+  position: fixed;
+  bottom: 40px;
   width: 350px;
   height: 50px;
-  background: #005eeb;
   border: none;
   border-radius: 50px;
-
-  cursor: pointer;
-
+  background: ${(props) => (props.active ? "#005eeb" : "#80aef5")};
+  cursor: ${(props) => (props.active ? "pointer" : "")};
   font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 500;
@@ -132,9 +95,9 @@ export const BtnSearch = styled.button`
   margin: 50px 0px 0px 0px;
 `;
 export const DropDownBox = styled.div`
+  position: fixed;
   width: 350px;
   padding: 10px 0px;
-
   background: #ffffff;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 `;
