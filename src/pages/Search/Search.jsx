@@ -18,6 +18,7 @@ const Search = () => {
     "감자탕",
   ];
 
+  const [keyboard, setKeyboard] = useState(false);
   const [foodWant, setFoodWant] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
@@ -55,7 +56,11 @@ const Search = () => {
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
-  const blurFoodWant = () => setFoodWant(foodWant.trimEnd());
+  const focusFoodWant = () => setKeyboard(true);
+  const blurFoodWant = () => {
+    setFoodWant(foodWant.trimEnd());
+    setKeyboard(false);
+  };
 
   useEffect(showDropDownList, [inputValue]);
 
@@ -70,6 +75,7 @@ const Search = () => {
           value={foodWant}
           onChange={changeFoodWant}
           onBlur={blurFoodWant}
+          onFocus={focusFoodWant}
           placeholder="ex. 약간 맵고 달달한 음식"
         ></styled.Input>
         <styled.Title>먹기 싫은 음식</styled.Title>
@@ -77,8 +83,14 @@ const Search = () => {
           type="text"
           value={inputValue}
           onChange={changeInputValue}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onFocus={() => {
+            setIsFocus(true);
+            setKeyboard(true);
+          }}
+          onBlur={() => {
+            setIsFocus(false);
+            setKeyboard(false);
+          }}
           placeholder="ex. 떡볶이"
         />
         {isHaveInputValue && (
@@ -105,6 +117,7 @@ const Search = () => {
           </styled.DropDownBox>
         )}
         <styled.BtnSearch
+          keyboard={keyboard}
           active={foodWant != ""}
           onClick={() => navigateToLoading()}
         >
