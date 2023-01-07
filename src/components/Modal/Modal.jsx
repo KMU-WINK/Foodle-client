@@ -47,7 +47,7 @@ const Modal = ({ ModalInfo }) => {
             color="#ffffff"
             onClick={() => {
               if (modalData[ModalInfo.modalType].text == "카카오톡") {
-                shareKakao(window.location.href, "Foodle", "약간 매콤한 음식");
+                shareKakao(window.location.href, "Foodle", ModalInfo.foodWant);
               }
               ModalInfo.setModalOpen(false);
             }}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
-import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
@@ -115,16 +114,19 @@ const Result = () => {
     { rank: 7, name: "매운 쫄갈비", src: food, rate: 77.0 },
     { rank: 8, name: "된장찌개", src: food, rate: 76.9 },
     { rank: 9, name: "김치 콩나물국", src: food, rate: 76.8 },
-    { rank: 10, name: "훠거", src: food, rate: 70.8 },
+    { rank: 10, name: "훠궈", src: food, rate: 70.8 },
   ];
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { foodWant } = location.state || false;
   const searchAgain = () => {
     navigate("/search");
   };
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [toastShare, setToastShare] = useState(false);
   const showModal = (type) => {
     setIsActive(false);
     setModalOpen(true);
@@ -157,12 +159,23 @@ const Result = () => {
         setIsActive={setIsActive}
         message="링크가 복사되었습니다."
       />
-      <styled.ButtonAgain onClick={searchAgain}>다시 검색하기</styled.ButtonAgain>
+      <Toast
+        isActive={toastShare}
+        setIsActive={setToastShare}
+        message="다른 사람의 결과는 공유할 수 없습니다."
+      />
+      <styled.ButtonAgain onClick={searchAgain}>
+        다시 검색하기
+      </styled.ButtonAgain>
       <styled.ShareButtons>
         <styled.ShareButton
           bgColor="#F7E569"
           onClick={() => {
-            showModal(1);
+            if (foodWant) {
+              showModal(1);
+            } else {
+              setToastShare(true);
+            }
           }}
         >
           <img src={kakao} />
@@ -178,7 +191,7 @@ const Result = () => {
           <img src={link} />
         </styled.ShareButton>
       </styled.ShareButtons>
-      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType }} />}
+      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType, foodWant }} />}
     </styled.PageContainier>
   );
 };

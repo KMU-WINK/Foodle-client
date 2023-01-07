@@ -93,6 +93,10 @@ export const BtnSearch = styled.button`
   display: flex;
   justify-content: center;
   margin: 50px 0px 0px 0px;
+
+  @media screen and (max-width: 440px) {
+    visibility: ${(props) => (props.keyboard ? "hidden" : "visible")};
+  }
 `;
 export const DropDownBox = styled.div`
   position: fixed;
