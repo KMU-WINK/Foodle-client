@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
 import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
@@ -119,12 +119,15 @@ const Result = () => {
   ];
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { foodWant } = location.state || false;
   const searchAgain = () => {
     navigate("/search");
   };
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [toastShare, setToastShare] = useState(false);
   const showModal = (type) => {
     setIsActive(false);
     setModalOpen(true);
@@ -157,12 +160,23 @@ const Result = () => {
         setIsActive={setIsActive}
         message="링크가 복사되었습니다."
       />
-      <styled.ButtonAgain onClick={searchAgain}>다시 검색하기</styled.ButtonAgain>
+      <Toast
+        isActive={toastShare}
+        setIsActive={setToastShare}
+        message="다른 사람의 결과는 공유할 수 없습니다."
+      />
+      <styled.ButtonAgain onClick={searchAgain}>
+        다시 검색하기
+      </styled.ButtonAgain>
       <styled.ShareButtons>
         <styled.ShareButton
           bgColor="#F7E569"
           onClick={() => {
-            showModal(1);
+            if (foodWant) {
+              showModal(1);
+            } else {
+              setToastShare(true);
+            }
           }}
         >
           <img src={kakao} />

@@ -16,7 +16,7 @@ const Loading = () => {
   const callback = () => {
     if (progress > 100) {
       // 로딩이 완료된 경우
-      navigate("/result");
+      navigate("/result", {state: { foodWant }});
     }
     setProgress(progress + 1);
   };
