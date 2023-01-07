@@ -28,7 +28,7 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading");
+      navigate("/loading", { state: {foodWant, inputValue}} );
     }
   };
 

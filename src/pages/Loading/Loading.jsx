@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as styled from "./styles";
 
 const Loading = () => {
   const [progress, setProgress] = useState(0);
   const savedCallback = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { foodWant, inputValue } = location.state || false; 
+
+  useEffect(() => {
+    if (!foodWant) navigate('/search');
+  }, [])
 
   const callback = () => {
     if (progress > 100) {
