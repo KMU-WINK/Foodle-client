@@ -160,14 +160,6 @@ const Result = () => {
       <styled.ButtonAgain onClick={searchAgain}>다시 검색하기</styled.ButtonAgain>
       <styled.ShareButtons>
         <styled.ShareButton
-          bgColor="#ffffff"
-          onClick={() => {
-            showModal(0);
-          }}
-        >
-          <img src={slack} />
-        </styled.ShareButton>
-        <styled.ShareButton
           bgColor="#F7E569"
           onClick={() => {
             showModal(1);
