@@ -23,11 +23,10 @@ export const Logo = styled.div`
 
 export const SearchBar = styled.div`
   width: 44vw;
-  min-width: 337px;
+  min-width: 300px;
   max-width: 561px;
   height: 44px;
   font-family: "Noto Sans CJK KR";
-  font-style: normal;
   font-weight: 350;
   font-size: inherit;
   color: #999999;
@@ -42,7 +41,7 @@ export const SearchBar = styled.div`
   margin-bottom: 32px;
 
   @media screen and (max-width: 440px) {
-    width: 70px;
+    width: 50px;
     padding: 4px 20px;
   }
 `;
