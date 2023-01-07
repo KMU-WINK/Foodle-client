@@ -5,15 +5,6 @@ import { useNavigate } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
 
-  const GotoMain = () => {
-    navigate("/");
-  };
-
-  const FindFood = () => {
-    // 선택된 정보로 서버에 쿼리 요청
-    navigate("/loading");
-  };
-
   const wholeTextArray = [
     "치킨",
     "피자",
@@ -61,7 +52,7 @@ const Search = () => {
   return (
     <styled.FlexBox>
       <styled.Box1>
-        <styled.Logo onClick={GotoMain}>FOODLE</styled.Logo>
+        <styled.Logo onClick={() => navigate('/')}>FOODLE</styled.Logo>
         <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
         <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
         <styled.Input placeholder="ex. 약간 맵고 달달한 음식"></styled.Input>
@@ -97,7 +88,7 @@ const Search = () => {
             })}
           </styled.DropDownBox>
         )}
-        <styled.BtnSearch onClick={FindFood}>검색하기</styled.BtnSearch>
+        <styled.BtnSearch onClick={() =>  navigate("/loading")}>검색하기</styled.BtnSearch>
       </styled.Box1>
     </styled.FlexBox>
   );
