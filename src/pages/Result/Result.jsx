@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import food from "../../images/test_food.svg";
-import slack from "../../images/ic_slack.svg";
 import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
@@ -192,7 +191,7 @@ const Result = () => {
           <img src={link} />
         </styled.ShareButton>
       </styled.ShareButtons>
-      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType }} />}
+      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType, foodWant }} />}
     </styled.PageContainier>
   );
 };
