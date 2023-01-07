@@ -75,12 +75,10 @@ export const BtnSearch = styled.button`
   bottom: 40px;
   width: 350px;
   height: 50px;
-  background: #005eeb;
   border: none;
   border-radius: 50px;
-
-  cursor: pointer;
-
+  background: ${(props) => (props.active ? "#005eeb" : "#80aef5")};
+  cursor: ${(props) => (props.active ? "pointer" : "")};
   font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 500;

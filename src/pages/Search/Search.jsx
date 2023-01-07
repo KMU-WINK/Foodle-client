@@ -18,11 +18,18 @@ const Search = () => {
     "감자탕",
   ];
 
+  const [foodWant, setFoodWant] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState(wholeTextArray);
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
+
+  const navigateToLoading = () => {
+    if (foodWant != "") {
+      navigate("/loading");
+    }
+  };
 
   const showDropDownList = () => {
     if (inputValue == "") {
@@ -47,15 +54,24 @@ const Search = () => {
     setIsHaveInputValue(false);
   };
 
+  const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
+  const blurFoodWant = () => setFoodWant(foodWant.trimEnd());
+
   useEffect(showDropDownList, [inputValue]);
 
   return (
     <styled.FlexBox>
       <styled.Box1>
-        <styled.Logo onClick={() => navigate('/')}>FOODLE</styled.Logo>
+        <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
         <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
         <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
-        <styled.Input placeholder="ex. 약간 맵고 달달한 음식"></styled.Input>
+        <styled.Input
+          type="text"
+          value={foodWant}
+          onChange={changeFoodWant}
+          onBlur={blurFoodWant}
+          placeholder="ex. 약간 맵고 달달한 음식"
+        ></styled.Input>
         <styled.Title>먹기 싫은 음식</styled.Title>
         <styled.Input
           type="text"
@@ -88,7 +104,12 @@ const Search = () => {
             })}
           </styled.DropDownBox>
         )}
-        <styled.BtnSearch onClick={() =>  navigate("/loading")}>검색하기</styled.BtnSearch>
+        <styled.BtnSearch
+          active={foodWant != ""}
+          onClick={() => navigateToLoading()}
+        >
+          검색하기
+        </styled.BtnSearch>
       </styled.Box1>
     </styled.FlexBox>
   );
