@@ -115,7 +115,7 @@ const Result = () => {
     { rank: 7, name: "매운 쫄갈비", src: food, rate: 77.0 },
     { rank: 8, name: "된장찌개", src: food, rate: 76.9 },
     { rank: 9, name: "김치 콩나물국", src: food, rate: 76.8 },
-    { rank: 10, name: "훠거", src: food, rate: 70.8 },
+    { rank: 10, name: "훠궈", src: food, rate: 70.8 },
   ];
 
   const navigate = useNavigate();
