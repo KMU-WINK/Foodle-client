@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Box1 = styled.div`
   width: 390px;
   padding: 0px 20px 0px 20px;
+  margin-bottom: 100px;
 `;
 
 export const FlexBox = styled.div`
@@ -108,6 +109,8 @@ export const BtnContent = styled.button`
 `;
 
 export const BtnSearch = styled.button`
+  position: fixed;
+  bottom: 40px;
   width: 350px;
   height: 50px;
   background: #005eeb;

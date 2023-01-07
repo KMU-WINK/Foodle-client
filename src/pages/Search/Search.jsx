@@ -14,80 +14,6 @@ const Search = () => {
     navigate("/loading");
   };
 
-  //  카테고리_국물 라디오 버튼
-  const [currCheckedSoup, setCurrCheckedSoup] = useState(0);
-  const [prevCheckedSoup, setPrevCheckedSoup] = useState(0);
-
-  function ClickSoup(index) {
-    setPrevCheckedSoup(currCheckedSoup);
-    setCurrCheckedSoup(index);
-  }
-
-  const categorySoup = [
-    { index: 1, content: "국물 있음" },
-    { index: 2, content: "국물 없음" },
-    { index: 3, content: "상관 없음" },
-  ];
-
-  const [checkedNation, setCheckedNation] = useState([]);
-
-  function ClickNation(index) {
-    if (checkedNation.includes(index)) {
-      const deletedArray = checkedNation.filter((number) => number != index);
-      setCheckedNation((checkedNation) => deletedArray);
-    } else {
-      setCheckedNation((checkedNation) => [...checkedNation, index]);
-    }
-  }
-
-  const categoryNation = [
-    { index: 1, content: "한식" },
-    { index: 2, content: "중식" },
-    { index: 3, content: "일식" },
-    { index: 4, content: "양식" },
-  ];
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
-
-  function Category(props) {
-    const isOpen = props.isOpen;
-
-    if (isOpen) {
-      return (
-        <>
-          <styled.Index>국물</styled.Index>
-          <styled.BtnBox>
-            {categorySoup.map((soup) => (
-              <styled.BtnContent
-                key={soup.index}
-                onClick={() => ClickSoup(soup.index)}
-                flag={currCheckedSoup === soup.index}
-              >
-                {soup.content}
-              </styled.BtnContent>
-            ))}
-          </styled.BtnBox>
-          <styled.Index>나라</styled.Index>
-          <styled.BtnBox>
-            {categoryNation.map((nation) => (
-              <styled.BtnContent
-                key={nation.index}
-                onClick={() => ClickNation(nation.index)}
-                flag={checkedNation.includes(nation.index)}
-              >
-                {nation.content}
-              </styled.BtnContent>
-            ))}
-          </styled.BtnBox>
-        </>
-      );
-    }
-  }
-
   const wholeTextArray = [
     "치킨",
     "피자",
@@ -171,8 +97,6 @@ const Search = () => {
             })}
           </styled.DropDownBox>
         )}
-        <styled.Title onClick={() => toggleOpen()}>카테고리</styled.Title>
-        <Category isOpen={isOpen} />
         <styled.BtnSearch onClick={FindFood}>검색하기</styled.BtnSearch>
       </styled.Box1>
     </styled.FlexBox>
