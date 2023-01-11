@@ -18,6 +18,7 @@ const Search = () => {
     "감자탕",
   ];
 
+  const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
   const [foodWant, setFoodWant] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -28,7 +29,7 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading", { state: { foodWant, inputValue } });
+      navigate("/loading", { state: { foodWant, bannedFood } });
     }
   };
 
@@ -52,7 +53,9 @@ const Search = () => {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue(clickedItem);
+    setBannedFood([clickedItem, ...bannedFood])
     setIsHaveInputValue(false);
+    console.log(bannedFood);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
@@ -61,6 +64,8 @@ const Search = () => {
     setFoodWant(foodWant.trimEnd());
     setKeyboard(false);
   };
+
+  useEffect(() => console.log(bannedFood), [bannedFood])
 
   useEffect(showDropDownList, [inputValue]);
 
