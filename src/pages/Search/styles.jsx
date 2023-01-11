@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
-export const Box1 = styled.div`
-  width: 390px;
-  padding: 0px 20px 0px 20px;
-  margin-bottom: 100px;
-`;
-
 export const FlexBox = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+`;
+
+export const Box1 = styled.div`
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
+  margin-bottom: 100px;
 `;
 
 export const Logo = styled.div`

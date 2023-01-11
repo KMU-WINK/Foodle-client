@@ -28,7 +28,7 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading", { state: {foodWant, inputValue}} );
+      navigate("/loading", { state: { foodWant, inputValue } });
     }
   };
 
@@ -67,55 +67,57 @@ const Search = () => {
   return (
     <styled.FlexBox>
       <styled.Box1>
-        <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
-        <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
-        <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
-        <styled.Input
-          type="text"
-          value={foodWant}
-          onChange={changeFoodWant}
-          onBlur={blurFoodWant}
-          onFocus={focusFoodWant}
-          placeholder="ex. 약간 맵고 달달한 음식"
-        ></styled.Input>
-        <styled.Title>먹기 싫은 음식</styled.Title>
-        <styled.Input
-          type="text"
-          value={inputValue}
-          onChange={changeInputValue}
-          onFocus={() => {
-            setIsFocus(true);
-            setKeyboard(true);
-          }}
-          onBlur={() => {
-            setIsFocus(false);
-            setKeyboard(false);
-          }}
-          placeholder="ex. 떡볶이"
-        />
-        {isHaveInputValue && (
-          <styled.DropDownBox>
-            {dropDownList.length === 0 && (
-              <styled.DropDownItem
-                noneItem={true}
-                onClick={() => setIsFocus(false)}
-              >
-                해당 음식을 찾을 수 없어요
-              </styled.DropDownItem>
-            )}
-            {dropDownList.map((item, index) => {
-              return (
+        <div>
+          <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
+          <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
+          <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
+          <styled.Input
+            type="text"
+            value={foodWant}
+            onChange={changeFoodWant}
+            onBlur={blurFoodWant}
+            onFocus={focusFoodWant}
+            placeholder="ex. 약간 맵고 달달한 음식"
+          ></styled.Input>
+          <styled.Title>먹기 싫은 음식</styled.Title>
+          <styled.Input
+            type="text"
+            value={inputValue}
+            onChange={changeInputValue}
+            onFocus={() => {
+              setIsFocus(true);
+              setKeyboard(true);
+            }}
+            onBlur={() => {
+              setIsFocus(false);
+              setKeyboard(false);
+            }}
+            placeholder="ex. 떡볶이"
+          />
+          {isHaveInputValue && (
+            <styled.DropDownBox>
+              {dropDownList.length === 0 && (
                 <styled.DropDownItem
-                  key={index}
-                  onClick={() => clickDropDownItem(item)}
-                  focus={dropDownIndex == index}
+                  noneItem={true}
+                  onClick={() => setIsFocus(false)}
                 >
-                  {item}
+                  해당 음식을 찾을 수 없어요
                 </styled.DropDownItem>
-              );
-            })}
-          </styled.DropDownBox>
-        )}
+              )}
+              {dropDownList.map((item, index) => {
+                return (
+                  <styled.DropDownItem
+                    key={index}
+                    onClick={() => clickDropDownItem(item)}
+                    focus={dropDownIndex == index}
+                  >
+                    {item}
+                  </styled.DropDownItem>
+                );
+              })}
+            </styled.DropDownBox>
+          )}
+        </div>
         <styled.BtnSearch
           keyboard={keyboard}
           active={foodWant != ""}
