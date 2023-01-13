@@ -18,47 +18,12 @@ const Search = () => {
     "감자탕",
   ];
 
-  const [currCheckedSoup, setCurrCheckedSoup] = useState(0);
-  const [prevCheckedSoup, setPrevCheckedSoup] = useState(0);
-
-  function ClickSoup(index) {
-    setPrevCheckedSoup(currCheckedSoup);
-    setCurrCheckedSoup(index);
-  }
+  const [isSoup, setIsSoup] = useState(true);
 
   const categorySoup = [
-    { index: 1, content: "국물 있음" },
-    { index: 2, content: "국물 없음" },
-    { index: 3, content: "상관 없음" },
+    { bool: true, content: "국물 있음" },
+    { bool: false, content: "국물 없음" },
   ];
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
-
-  function Category(props) {
-    const isOpen = props.isOpen;
-    if (isOpen) {
-      return (
-        <>
-          <styled.Index>국물</styled.Index>
-          <styled.BtnBox>
-            {categorySoup.map((soup) => (
-              <styled.BtnContent
-                key={soup.index}
-                onClick={() => ClickSoup(soup.index)}
-                flag={currCheckedSoup === soup.index}
-              >
-                {soup.content}
-              </styled.BtnContent>
-            ))}
-          </styled.BtnBox>
-        </>
-      );
-    }
-  }
 
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
@@ -71,7 +36,9 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading", { state: { foodWant, bannedFood } });
+      navigate("/loading", {
+        state: { foodWant, bannedFood, isSoup },
+      });
     }
   };
 
@@ -164,8 +131,18 @@ const Search = () => {
               })}
             </styled.DropDownBox>
           )}
-          <styled.Title onClick={() => toggleOpen()}>카테고리</styled.Title>
-          <Category isOpen={isOpen} />
+          <styled.Title>카테고리</styled.Title>
+          <styled.BtnBox>
+            {categorySoup.map((soup) => (
+              <styled.BtnContent
+                key={soup.bool}
+                onClick={() => setIsSoup(soup.bool)}
+                flag={isSoup === soup.bool}
+              >
+                {soup.content}
+              </styled.BtnContent>
+            ))}
+          </styled.BtnBox>
         </div>
         <styled.BtnSearch
           keyboard={keyboard}
