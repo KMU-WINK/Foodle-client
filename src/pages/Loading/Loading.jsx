@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { recommendFood } from "../../axios/find-food";
@@ -9,13 +8,12 @@ const Loading = () => {
   const savedCallback = useRef();
   const navigate = useNavigate();
   const location = useLocation();
-  const isSoup = true;
-  const { foodWant, bannedFood } = location.state || false;
+  const { foodWant, bannedFood, isSoup } = location.state || false;
 
   useEffect(() => {
     const data = {
-      'ban': bannedFood
-    }
+      ban: bannedFood,
+    };
     console.log(data);
     if (!foodWant) navigate("/search");
     recommendFood(foodWant, isSoup, data);
