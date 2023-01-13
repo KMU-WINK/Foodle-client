@@ -120,3 +120,36 @@ export const DropDownItem = styled.div`
     background-color: ${(props) => (props.noneItem ? "#FFFFFF" : "#E8E8F8")};
   }
 `;
+
+export const BtnBox = styled.div`
+  display: flex;
+  margin: 10px 0px 10px 0px;
+`;
+
+export const Index = styled.div`
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  /* identical to box height */
+  color: #191919;
+`;
+
+export const BtnContent = styled.button`
+  background: #ffffff;
+  border: 0.7px solid ${(props) => (props.flag ? "#005EEB" : "#999999")};
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: ${(props) => (props.flag ? "#005EEB" : "#999999")};
+  padding: 5px 10px 5px 10px;
+  margin: 0px 4px 0px 0px;
+`;

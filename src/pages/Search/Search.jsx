@@ -18,6 +18,14 @@ const Search = () => {
     "감자탕",
   ];
 
+  const [isSoup, setIsSoup] = useState(true);
+
+  const categorySoup = [
+    { bool: true, content: "국물 있음" },
+    { bool: false, content: "국물 없음" },
+  ];
+
+  const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
   const [foodWant, setFoodWant] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -28,7 +36,9 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading", { state: { foodWant, inputValue } });
+      navigate("/loading", {
+        state: { foodWant, bannedFood, isSoup },
+      });
     }
   };
 
@@ -52,7 +62,9 @@ const Search = () => {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue(clickedItem);
+    setBannedFood([clickedItem, ...bannedFood]);
     setIsHaveInputValue(false);
+    console.log(bannedFood);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
@@ -61,6 +73,8 @@ const Search = () => {
     setFoodWant(foodWant.trimEnd());
     setKeyboard(false);
   };
+
+  useEffect(() => console.log(bannedFood), [bannedFood]);
 
   useEffect(showDropDownList, [inputValue]);
 
@@ -78,7 +92,7 @@ const Search = () => {
             onBlur={blurFoodWant}
             onFocus={focusFoodWant}
             placeholder="ex. 약간 맵고 달달한 음식"
-          ></styled.Input>
+          />
           <styled.Title>먹기 싫은 음식</styled.Title>
           <styled.Input
             type="text"
@@ -117,6 +131,18 @@ const Search = () => {
               })}
             </styled.DropDownBox>
           )}
+          <styled.Title>카테고리</styled.Title>
+          <styled.BtnBox>
+            {categorySoup.map((soup) => (
+              <styled.BtnContent
+                key={soup.bool}
+                onClick={() => setIsSoup(soup.bool)}
+                flag={isSoup === soup.bool}
+              >
+                {soup.content}
+              </styled.BtnContent>
+            ))}
+          </styled.BtnBox>
         </div>
         <styled.BtnSearch
           keyboard={keyboard}
