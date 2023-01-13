@@ -92,7 +92,7 @@ const Search = () => {
             onBlur={blurFoodWant}
             onFocus={focusFoodWant}
             placeholder="ex. 약간 맵고 달달한 음식"
-          ></styled.Input>
+          />
           <styled.Title>먹기 싫은 음식</styled.Title>
           <styled.Input
             type="text"

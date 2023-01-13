@@ -16,7 +16,9 @@ const Loading = () => {
     };
     console.log(data);
     if (!foodWant) navigate("/search");
-    recommendFood(foodWant, isSoup, data);
+    recommendFood(foodWant, isSoup, data).then((res) => {
+      console.log(res);
+    });
   }, []);
 
   const callback = () => {
