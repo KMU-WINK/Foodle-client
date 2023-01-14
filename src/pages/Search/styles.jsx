@@ -109,6 +109,9 @@ export const DropDownBox = styled.div`
   padding: 10px 0px;
   background: #ffffff;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+
+  max-height: 190px;
+  overflow: hidden;
 `;
 
 export const DropDownItem = styled.div`
