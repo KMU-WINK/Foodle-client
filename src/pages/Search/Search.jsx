@@ -29,9 +29,9 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
-  const [isMeat, setIsMeat] = useState(false);      // 고기류
-  const [isRice, setIsRice] = useState(false);      // 밥류
-  const [isNoodle, setIsNoodle] = useState(false);  // 면류
+  const [isMeat, setIsMeat] = useState(false); // 고기류
+  const [isRice, setIsRice] = useState(false); // 밥류
+  const [isNoodle, setIsNoodle] = useState(false); // 면류
 
   const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
@@ -68,15 +68,17 @@ const Search = () => {
   };
   const removeBannedItem = (delIndex) => {
     setBannedFood(
-        bannedFood.filter(function (_, index) {
-          return index !== delIndex;
-        })
+      bannedFood.filter(function (_, index) {
+        return index !== delIndex;
+      })
     );
   };
 
   useEffect(() => {
     if (inputValue) {
-      const body = { separatedElement: Hangul.disassemble(inputValue).join("") };
+      const body = {
+        separatedElement: Hangul.disassemble(inputValue).join(""),
+      };
       getSearchMenus(body).then((r) => {
         setSearchResult(r);
       });
@@ -96,69 +98,54 @@ const Search = () => {
   }, [searchResult]);
 
   return (
-      <styled.FlexBox>
-        <styled.Box1>
-          <div>
-            <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
-            <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
-            <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
-            <styled.Input
-                type="text"
-                value={foodWant}
-                onChange={changeFoodWant}
-                onBlur={blurFoodWant}
-                onFocus={focusFoodWant}
-                placeholder="ex. 약간 맵고 달달한"
-            />
-            <styled.Title>먹기 싫은 음식</styled.Title>
-            <styled.Input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onFocus={() => {
-                  setIsFocus(true);
-                  setKeyboard(true);
-                }}
-                onBlur={() => {
-                  setIsFocus(false);
-                  setKeyboard(false);
-                }}
-                placeholder="ex. 떡볶이"
-            />
-            {isHaveInputValue && (
-                inputValue && (
-                    <styled.DropDownBox>
-                      {dropDownList.length === 0 && (
-                          <styled.DropDownItem
-                              noneItem={true}
-                              onClick={() => setIsFocus(false)}
-                          >
-                            해당 음식을 찾을 수 없어요
-                          </styled.DropDownItem>
-                      )}
-                      {dropDownList.map((item, index) => {
-                        return (
-                            <styled.DropDownItem
-                                key={index}
-                                onClick={() => clickDropDownItem(item.name)}
-                                focus={dropDownIndex === index}
-                            >
-                              {item.name}
-                            </styled.DropDownItem>
-                        );
-                      })}
-                    </styled.DropDownBox>
-                )
-            )}
-            <styled.BannedItems>
-              {bannedFood.map((item, index) => {
+    <styled.FlexBox>
+      <styled.Box1>
+        <div>
+          <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
+          <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
+          <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
+          <styled.Input
+            type="text"
+            value={foodWant}
+            onChange={changeFoodWant}
+            onBlur={blurFoodWant}
+            onFocus={focusFoodWant}
+            placeholder="ex. 약간 맵고 달달한"
+          />
+          <styled.Title>먹기 싫은 음식</styled.Title>
+          <styled.Input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onFocus={() => {
+              setIsFocus(true);
+              setKeyboard(true);
+            }}
+            onBlur={() => {
+              setIsFocus(false);
+              setKeyboard(false);
+            }}
+            placeholder="ex. 떡볶이"
+          />
+          {isHaveInputValue && inputValue && (
+            <styled.DropDownBox>
+              {dropDownList.length === 0 && (
+                <styled.DropDownItem
+                  noneItem={true}
+                  onClick={() => setIsFocus(false)}
+                >
+                  해당 음식을 찾을 수 없어요
+                </styled.DropDownItem>
+              )}
+              {dropDownList.map((item, index) => {
                 return (
-                    <styled.BannedItem
-                        key={index}
-                        onClick={() => removeBannedItem(index)}
-                    >
-                      {item} ✕
-                    </styled.BannedItem>
+                  <styled.DropDownItem
+                    key={index}
+                    onClick={() => clickDropDownItem(item.name)}
+                    focus={dropDownIndex === index}
+                  >
+                    {item.name}
+                  </styled.DropDownItem>
                 );
               })}
             </styled.DropDownBox>
@@ -202,9 +189,18 @@ const Search = () => {
           </styled.BtnBox>
           <styled.BtnTitle>기타</styled.BtnTitle>
           <styled.BtnBox>
-            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>고기류</styled.BtnContent>
-            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>밥류</styled.BtnContent>
-            <styled.BtnContent onClick={() => setIsNoodle(!isNoodle)} flag={isNoodle}>면류</styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>
+              고기류
+            </styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>
+              밥류
+            </styled.BtnContent>
+            <styled.BtnContent
+              onClick={() => setIsNoodle(!isNoodle)}
+              flag={isNoodle}
+            >
+              면류
+            </styled.BtnContent>
           </styled.BtnBox>
         </div>
         <styled.BtnSearch
