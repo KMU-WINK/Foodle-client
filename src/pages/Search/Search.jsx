@@ -13,11 +13,11 @@ const Search = () => {
   ];
 
   const categoryNation = [
-    { index: 0, content: "한식"},
-    { index: 1, content: "중식"},
-    { index: 2, content: "일식"},
-    { index: 3, content: "양식"},
-  ]
+    { index: 0, content: "한식" },
+    { index: 1, content: "중식" },
+    { index: 2, content: "일식" },
+    { index: 3, content: "양식" },
+  ];
 
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
@@ -29,6 +29,10 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
+  const [isMeat, setIsMeat] = useState(false);      // 고기류
+  const [isRice, setIsRice] = useState(false);      // 밥류
+  const [isNoodle, setIsNoodle] = useState(false);  // 면류
+
   const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
 
@@ -39,7 +43,7 @@ const Search = () => {
     } else {
       setFoodNation([...foodNation, index]);
     }
-  }
+  };
 
   const navigateToLoading = () => {
     if (foodWant !== "") {
@@ -51,6 +55,7 @@ const Search = () => {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue(() => "");
+    if (bannedFood.length === 5) return;
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(() => false);
   };
@@ -156,40 +161,61 @@ const Search = () => {
                     </styled.BannedItem>
                 );
               })}
-            </styled.BannedItems>
-            <styled.Title>카테고리</styled.Title>
-            <styled.BtnBox>
-              {categorySoup.map((soup) => (
-                  <styled.BtnContent
-                      key={soup.bool}
-                      onClick={() => setIsSoup(soup.bool)}
-                      flag={isSoup === soup.bool}
-                  >
-                    {soup.content}
-                  </styled.BtnContent>
-              ))}
-            </styled.BtnBox>
-            <styled.BtnBox>
-              {categoryNation.map((nation) => (
-                  <styled.BtnContent
-                      key={nation.index}
-                      onClick={() => clickNation(nation.index)}
-                      flag={foodNation.includes(nation.index)}
-                  >
-                    {nation.content}
-                  </styled.BtnContent>
-              ))}
-            </styled.BtnBox>
-          </div>
-          <styled.BtnSearch
-              keyboard={keyboard}
-              active={foodWant !== ""}
-              onClick={() => navigateToLoading()}
-          >
-            검색하기
-          </styled.BtnSearch>
-        </styled.Box1>
-      </styled.FlexBox>
+            </styled.DropDownBox>
+          )}
+          <styled.BannedItems>
+            {bannedFood.map((item, index) => {
+              return (
+                <styled.BannedItem
+                  key={index}
+                  onClick={() => removeBannedItem(index)}
+                >
+                  {item} ✕
+                </styled.BannedItem>
+              );
+            })}
+          </styled.BannedItems>
+          <styled.Title>카테고리</styled.Title>
+          <styled.BtnTitle>국물</styled.BtnTitle>
+          <styled.BtnBox>
+            {categorySoup.map((soup) => (
+              <styled.BtnContent
+                key={soup.bool}
+                onClick={() => setIsSoup(soup.bool)}
+                flag={isSoup === soup.bool}
+              >
+                {soup.content}
+              </styled.BtnContent>
+            ))}
+          </styled.BtnBox>
+          <styled.BtnTitle>나라</styled.BtnTitle>
+          <styled.BtnBox>
+            {categoryNation.map((nation) => (
+              <styled.BtnContent
+                key={nation.index}
+                onClick={() => clickNation(nation.index)}
+                flag={foodNation.includes(nation.index)}
+              >
+                {nation.content}
+              </styled.BtnContent>
+            ))}
+          </styled.BtnBox>
+          <styled.BtnTitle>기타</styled.BtnTitle>
+          <styled.BtnBox>
+            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>고기류</styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>밥류</styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsNoodle(!isNoodle)} flag={isNoodle}>면류</styled.BtnContent>
+          </styled.BtnBox>
+        </div>
+        <styled.BtnSearch
+          keyboard={keyboard}
+          active={foodWant !== ""}
+          onClick={() => navigateToLoading()}
+        >
+          검색하기
+        </styled.BtnSearch>
+      </styled.Box1>
+    </styled.FlexBox>
   );
 };
 

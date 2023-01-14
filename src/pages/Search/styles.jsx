@@ -123,7 +123,7 @@ export const DropDownItem = styled.div`
 
 export const BtnBox = styled.div`
   display: flex;
-  margin: 10px 0px 10px 0px;
+  gap: 4px;
 `;
 
 export const Index = styled.div`
@@ -153,7 +153,7 @@ export const BtnContent = styled.button`
   text-align: center;
   color: ${(props) => (props.flag ? "#005EEB" : "#999999")};
   padding: 5px 10px 5px 10px;
-  margin: 0px 4px 0px 0px;
+
 `;
 
 export const BannedItems = styled.div`
@@ -180,4 +180,11 @@ export const BannedItem = styled.div`
     background-color: #80aef5;
     color: #ffffff;
   }
+`;
+
+export const BtnTitle = styled.div`
+  margin: 22px 0px 8px 0px;
+  font-style: 'Noto Sans CJK KR';
+  font-size: 14px;
+  color: #191919;
 `;
