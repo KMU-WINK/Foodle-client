@@ -1,38 +1,26 @@
 import React, { useEffect, useState } from "react";
 import * as styled from "./styles";
 import { useNavigate } from "react-router-dom";
+import { getSearchMenus } from "../../axios/auto-complete";
+import * as Hangul from "hangul-js";
 
 const Search = () => {
   const navigate = useNavigate();
-
-  const wholeTextArray = [
-    "치킨",
-    "피자",
-    "핫도그",
-    "순댓국",
-    "햄버거",
-    "샌드위치",
-    "돈까스",
-    "닭갈비",
-    "팝콘",
-    "감자탕",
-  ];
-
-  const [isSoup, setIsSoup] = useState(true);
 
   const categorySoup = [
     { bool: true, content: "국물 있음" },
     { bool: false, content: "국물 없음" },
   ];
-
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
   const [foodWant, setFoodWant] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
-  const [dropDownList, setDropDownList] = useState(wholeTextArray);
+  const [searchResult, setSearchResult] = useState([]);
+  const [dropDownList, setDropDownList] = useState(searchResult);
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
+  const [isSoup, setIsSoup] = useState(true);
 
   const navigateToLoading = () => {
     if (foodWant != "") {
@@ -47,17 +35,18 @@ const Search = () => {
       setIsHaveInputValue(false);
       setDropDownList([]);
     } else {
-      // 해당 코드를 서버에 query를 보내는 형식으로 변경해야 합니다.
-      const findResult = wholeTextArray.filter((item) =>
-        item.includes(inputValue)
-      );
-      setDropDownList(findResult);
+      setDropDownList(searchResult);
     }
   };
 
   const changeInputValue = (event) => {
     setInputValue(event.target.value);
     setIsHaveInputValue(true);
+    const data = Hangul.disassemble(inputValue).join("");
+    const body = { separatedElement: data };
+    getSearchMenus(body).then((r) => {
+      setSearchResult(r);
+    });
   };
 
   const clickDropDownItem = (clickedItem) => {
@@ -126,10 +115,10 @@ const Search = () => {
                 return (
                   <styled.DropDownItem
                     key={index}
-                    onClick={() => clickDropDownItem(item)}
+                    onClick={() => clickDropDownItem(item.name)}
                     focus={dropDownIndex == index}
                   >
-                    {item}
+                    {item.name}
                   </styled.DropDownItem>
                 );
               })}
