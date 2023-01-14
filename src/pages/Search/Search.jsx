@@ -131,6 +131,11 @@ const Search = () => {
               })}
             </styled.DropDownBox>
           )}
+          <styled.BannedItems>
+            {bannedFood.map((item) => {
+              return <styled.BannedItem>{item} ✕</styled.BannedItem>;
+            })}
+          </styled.BannedItems>
           <styled.Title>카테고리</styled.Title>
           <styled.BtnBox>
             {categorySoup.map((soup) => (
