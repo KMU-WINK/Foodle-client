@@ -1,4 +1,4 @@
-import baseService from "./base-service";
+import { baseService } from "./base-service";
 
 export const recommendFood = async (sentence, is_soup, data) => {
   try {

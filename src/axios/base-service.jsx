@@ -9,7 +9,7 @@ export const baseService = axios.create({
   "Content-Type": "application/json",
 });
 
-export const AutoCompleteService = axios.create({
+export const autoCompleteService = axios.create({
   baseURL: autoCompleteURL.toString(),
   "Content-Type": "application/json",
 });
