@@ -121,7 +121,7 @@ const Result = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { foodWant, recommendResult } = location.state || false;
+  const { foodWant, recommendResult, shareLink } = location.state || false;
   const searchAgain = () => {
     navigate("/search");
   };
@@ -135,7 +135,7 @@ const Result = () => {
     setModalType(type);
   };
   const copyClipBoard = async () => {
-    await navigator.clipboard.writeText(window.location.href);
+    await navigator.clipboard.writeText(shareLink);
     setIsActive(true);
   };
 

@@ -8,20 +8,22 @@ const Loading = () => {
   const savedCallback = useRef();
   const navigate = useNavigate();
   const location = useLocation();
-  const { foodWant } = location.state || false;
+  // const { foodWant } = location.state || false;
   const [searchParams] = useSearchParams();
   const [recommendResult, setRecommendResult] = useState([]);
   const queryList = [...searchParams];
 
   useEffect(() => {
-    const isSoup = queryList[2][1];
-    const data = {
-      ban: queryList[1][1],
-    };
-    console.log(data);
-    console.log(queryList);
+    const url = new URL(window.location.href);
+    const urlParmas = url.searchParams;
 
-    if (!foodWant) navigate("/search");
+    const foodWant = urlParmas.get('want') || queryList[0][1];
+    const isSoup = urlParmas.get('is') || queryList[2][1];
+    const data = {
+      ban: urlParmas.get('ban') || queryList[1][1],
+    };
+
+    if (!(isSoup && data && foodWant)) navigate("/search");
     recommendFood(foodWant, isSoup, data).then((res) => {
       console.log(res);
       setRecommendResult(res);
@@ -31,7 +33,8 @@ const Loading = () => {
   const callback = () => {
     if (progress > 100) {
       // 로딩이 완료된 경우
-      navigate("/result", { state: { foodWant, recommendResult } });
+      const shareLink = window.location.href;
+      navigate("/result", { state: { recommendResult, shareLink } });
     }
     setProgress(progress + 1);
   };
