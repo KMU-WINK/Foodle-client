@@ -14,11 +14,13 @@ const Loading = () => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const urlParmas = url.searchParams;
-
     const foodWant = urlParmas.get("want");
     const isSoup = urlParmas.get("is");
+
     const data = {
       ban: urlParmas.get("ban"),
+      nation: urlParmas.get('nation'),
+      etc: urlParmas.get("extra"),
     };
 
     if (!(isSoup && data && foodWant)) navigate("/search");
