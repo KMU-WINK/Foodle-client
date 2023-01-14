@@ -8,7 +8,7 @@ const Loading = () => {
   const savedCallback = useRef();
   const navigate = useNavigate();
   const location = useLocation();
-  // const { foodWant } = location.state || false;
+  const { myRes } = location.state || false;
   const [searchParams] = useSearchParams();
   const [recommendResult, setRecommendResult] = useState([]);
   const queryList = [...searchParams];
@@ -34,7 +34,7 @@ const Loading = () => {
     if (progress > 100) {
       // 로딩이 완료된 경우
       const shareLink = window.location.href;
-      navigate("/result", { state: { recommendResult, shareLink } });
+      navigate("/result", { state: { recommendResult, shareLink, myRes } });
     }
     setProgress(progress + 1);
   };

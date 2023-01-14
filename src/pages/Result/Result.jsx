@@ -121,7 +121,7 @@ const Result = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { foodWant, recommendResult, shareLink } = location.state || false;
+  const { myRes, recommendResult, shareLink } = location.state || false;
   const searchAgain = () => {
     navigate("/search");
   };
@@ -173,7 +173,7 @@ const Result = () => {
         <styled.ShareButton
           bgColor="#F7E569"
           onClick={() => {
-            if (foodWant) {
+            if (myRes) {
               showModal(1);
             } else {
               setToastShare(true);
@@ -194,7 +194,7 @@ const Result = () => {
         </styled.ShareButton>
       </styled.ShareButtons>
       <div className="adfit" />
-      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType, foodWant }} />}
+      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType, shareLink }} />}
     </styled.PageContainier>
   );
 };

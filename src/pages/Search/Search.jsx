@@ -21,11 +21,12 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
+  const myRes = true;
 
   const navigateToLoading = () => {
     if (foodWant != "") {
       navigate(`/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}`, {
-        state: { foodWant },
+        state: { foodWant, myRes },
       });
     }
   };
