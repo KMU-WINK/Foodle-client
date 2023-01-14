@@ -159,7 +159,6 @@ const Result = () => {
                 />
                 <p>{item.name}</p>
               </div>
-              <p>{item.score.toFixed(1)}% 일치</p>
             </styled.ItemContent>
           </styled.ResultItem>
         ))}
