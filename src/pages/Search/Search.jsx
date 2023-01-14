@@ -25,7 +25,7 @@ const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-  const [dropDownList, setDropDownList] = useState(searchResult);
+  const [dropDownList, setDropDownList] = useState([]);
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
@@ -38,7 +38,7 @@ const Search = () => {
 
   const clickNation = (index) => {
     if (foodNation.includes(index)) {
-      const deletedArray = foodNation.filter((number) => number != index);
+      const deletedArray = foodNation.filter((number) => number !== index);
       setFoodNation(deletedArray);
     } else {
       setFoodNation([...foodNation, index]);
@@ -46,37 +46,18 @@ const Search = () => {
   };
 
   const navigateToLoading = () => {
-    if (foodWant != "") {
+    if (foodWant !== "") {
       navigate(`/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}`, {
         state: { foodWant, myRes },
       });
     }
   };
 
-  const showDropDownList = () => {
-    if (inputValue == "") {
-      setIsHaveInputValue(false);
-      setDropDownList([]);
-    } else {
-      setDropDownList(searchResult);
-    }
-  };
-
-  const changeInputValue = (event) => {
-    setInputValue(event.target.value);
-    setIsHaveInputValue(true);
-    const data = Hangul.disassemble(inputValue).join("");
-    const body = { separatedElement: data };
-    getSearchMenus(body).then((r) => {
-      setSearchResult(r);
-    });
-  };
-
   const clickDropDownItem = (clickedItem) => {
-    setInputValue("");
+    setInputValue(() => "");
     if (bannedFood.length === 5) return;
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
-    setIsHaveInputValue(false);
+    setIsHaveInputValue(() => false);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
@@ -87,63 +68,97 @@ const Search = () => {
   };
   const removeBannedItem = (delIndex) => {
     setBannedFood(
-      bannedFood.filter(function (_, index) {
-        return index !== delIndex;
-      })
+        bannedFood.filter(function (_, index) {
+          return index !== delIndex;
+        })
     );
   };
 
-  useEffect(showDropDownList, [inputValue]);
+  useEffect(() => {
+    if (inputValue) {
+      const body = { separatedElement: Hangul.disassemble(inputValue).join("") };
+      getSearchMenus(body).then((r) => {
+        setSearchResult(r);
+      });
+    } else {
+      setSearchResult([]);
+    }
+  }, [inputValue]);
+
+  useEffect(() => {
+    if (searchResult) {
+      setDropDownList(() => searchResult);
+      setIsHaveInputValue(() => true);
+    } else {
+      setDropDownList(() => []);
+      setIsHaveInputValue(() => false);
+    }
+  }, [searchResult]);
 
   return (
-    <styled.FlexBox>
-      <styled.Box1>
-        <div>
-          <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
-          <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
-          <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
-          <styled.Input
-            type="text"
-            value={foodWant}
-            onChange={changeFoodWant}
-            onBlur={blurFoodWant}
-            onFocus={focusFoodWant}
-            placeholder="ex. 약간 맵고 달달한"
-          />
-          <styled.Title>먹기 싫은 음식</styled.Title>
-          <styled.Input
-            type="text"
-            value={inputValue}
-            onChange={changeInputValue}
-            onFocus={() => {
-              setIsFocus(true);
-              setKeyboard(true);
-            }}
-            onBlur={() => {
-              setIsFocus(false);
-              setKeyboard(false);
-            }}
-            placeholder="ex. 떡볶이"
-          />
-          {isHaveInputValue && (
-            <styled.DropDownBox>
-              {dropDownList.length === 0 && (
-                <styled.DropDownItem
-                  noneItem={true}
-                  onClick={() => setIsFocus(false)}
-                >
-                  해당 음식을 찾을 수 없어요
-                </styled.DropDownItem>
-              )}
-              {dropDownList.map((item, index) => {
+      <styled.FlexBox>
+        <styled.Box1>
+          <div>
+            <styled.Logo onClick={() => navigate("/")}>FOODLE</styled.Logo>
+            <styled.TitleWant fontWeight="500">어떤 느낌의</styled.TitleWant>
+            <styled.TitleWant fontWeight="400">음식을 원하세요?</styled.TitleWant>
+            <styled.Input
+                type="text"
+                value={foodWant}
+                onChange={changeFoodWant}
+                onBlur={blurFoodWant}
+                onFocus={focusFoodWant}
+                placeholder="ex. 약간 맵고 달달한"
+            />
+            <styled.Title>먹기 싫은 음식</styled.Title>
+            <styled.Input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onFocus={() => {
+                  setIsFocus(true);
+                  setKeyboard(true);
+                }}
+                onBlur={() => {
+                  setIsFocus(false);
+                  setKeyboard(false);
+                }}
+                placeholder="ex. 떡볶이"
+            />
+            {isHaveInputValue && (
+                inputValue && (
+                    <styled.DropDownBox>
+                      {dropDownList.length === 0 && (
+                          <styled.DropDownItem
+                              noneItem={true}
+                              onClick={() => setIsFocus(false)}
+                          >
+                            해당 음식을 찾을 수 없어요
+                          </styled.DropDownItem>
+                      )}
+                      {dropDownList.map((item, index) => {
+                        return (
+                            <styled.DropDownItem
+                                key={index}
+                                onClick={() => clickDropDownItem(item.name)}
+                                focus={dropDownIndex === index}
+                            >
+                              {item.name}
+                            </styled.DropDownItem>
+                        );
+                      })}
+                    </styled.DropDownBox>
+                )
+            )}
+            <styled.BannedItems>
+              {bannedFood.map((item, index) => {
                 return (
-                  <styled.DropDownItem
-                    key={index}
-                    onClick={() => clickDropDownItem(item.name)}
-                    focus={dropDownIndex == index}
-                  >
-                    {item.name}
-                  </styled.DropDownItem>
+                    <styled.BannedItem
+                        key={index}
+                        onClick={() => removeBannedItem(index)}
+                    >
+                      {item} ✕
+                    </styled.BannedItem>
                 );
               })}
             </styled.DropDownBox>
@@ -194,7 +209,7 @@ const Search = () => {
         </div>
         <styled.BtnSearch
           keyboard={keyboard}
-          active={foodWant != ""}
+          active={foodWant !== ""}
           onClick={() => navigateToLoading()}
         >
           검색하기
