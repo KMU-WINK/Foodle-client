@@ -29,10 +29,9 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
-  const [isMeat, setIsMeat] = useState(false); // 고기류
-  const [isRice, setIsRice] = useState(false); // 밥류
-  const [isNoodle, setIsNoodle] = useState(false); // 면류
-
+  const [isMeat, setIsMeat] = useState(0); // 고기류
+  const [isRice, setIsRice] = useState(0); // 밥류
+  const [isNoodle, setIsNoodle] = useState(0); // 면류
   const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
 
@@ -47,9 +46,17 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant !== "") {
-      navigate(`/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}`, {
-        state: { foodWant, myRes },
-      });
+      console.log(foodNation);
+      navigate(
+        `/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}&nation=${foodNation}&extra=${[
+          isMeat,
+          isRice,
+          isNoodle,
+        ]}`,
+        {
+          state: { foodWant, myRes },
+        }
+      );
     }
   };
 
@@ -189,14 +196,38 @@ const Search = () => {
           </styled.BtnBox>
           <styled.BtnTitle>기타</styled.BtnTitle>
           <styled.BtnBox>
-            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>
+            <styled.BtnContent
+              onClick={() => {
+                if (isMeat) {
+                  setIsMeat(0);
+                } else {
+                  setIsMeat(1);
+                }
+              }}
+              flag={isMeat}
+            >
               고기류
             </styled.BtnContent>
-            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>
+            <styled.BtnContent
+              onClick={() => {
+                if (isRice) {
+                  setIsRice(0);
+                } else {
+                  setIsRice(1);
+                }
+              }}
+              flag={isRice}
+            >
               밥류
             </styled.BtnContent>
             <styled.BtnContent
-              onClick={() => setIsNoodle(!isNoodle)}
+              onClick={() => {
+                if (isNoodle) {
+                  setIsNoodle(0);
+                } else {
+                  setIsNoodle(1);
+                }
+              }}
               flag={isNoodle}
             >
               면류
