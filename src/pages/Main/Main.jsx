@@ -5,6 +5,7 @@ import Typing from "react-kr-typing-anim";
 
 const Main = () => {
   const navigate = useNavigate();
+  const Typing = Typing.default ? Typing.default : Typing;
 
   const GotoSearch = () => {
     navigate("/search");
