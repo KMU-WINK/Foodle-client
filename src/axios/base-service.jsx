@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = new URL("https://api.kmu-wink.com/");
 
-const autoCompleteURL = new URL("http://43.200.252.58:8080");
+const autoCompleteURL = new URL("https://server.kmu-wink.com/");
 
 export const baseService = axios.create({
   baseURL: baseURL.toString(),
