@@ -61,8 +61,8 @@ const Search = () => {
   };
 
   const clickDropDownItem = (clickedItem) => {
-    setInputValue(clickedItem);
-    setBannedFood([clickedItem, ...bannedFood]);
+    setInputValue('');
+    setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(false);
     console.log(bannedFood);
   };
@@ -73,8 +73,6 @@ const Search = () => {
     setFoodWant(foodWant.trimEnd());
     setKeyboard(false);
   };
-
-  useEffect(() => console.log(bannedFood), [bannedFood]);
 
   useEffect(showDropDownList, [inputValue]);
 
