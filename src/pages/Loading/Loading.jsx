@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { recommendFood } from "../../axios/find-food";
 import * as styled from "./styles";
 
@@ -8,23 +8,30 @@ const Loading = () => {
   const savedCallback = useRef();
   const navigate = useNavigate();
   const location = useLocation();
-  const { foodWant, bannedFood, isSoup } = location.state || false;
+  const { foodWant } = location.state || false;
+  const [searchParams] = useSearchParams();
+  const [recommendResult, setRecommendResult] = useState([]);
+  const queryList = [...searchParams];
 
   useEffect(() => {
+    const isSoup = queryList[2][1];
     const data = {
-      ban: bannedFood,
+      ban: queryList[1][1],
     };
     console.log(data);
+    console.log(queryList);
+
     if (!foodWant) navigate("/search");
     recommendFood(foodWant, isSoup, data).then((res) => {
       console.log(res);
+      setRecommendResult(res);
     });
   }, []);
 
   const callback = () => {
     if (progress > 100) {
       // 로딩이 완료된 경우
-      navigate("/result", { state: { foodWant } });
+      navigate("/result", { state: { foodWant, recommendResult } });
     }
     setProgress(progress + 1);
   };
