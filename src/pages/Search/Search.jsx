@@ -24,8 +24,8 @@ const Search = () => {
 
   const navigateToLoading = () => {
     if (foodWant != "") {
-      navigate("/loading", {
-        state: { foodWant, bannedFood, isSoup },
+      navigate(`/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}`, {
+        state: { foodWant },
       });
     }
   };

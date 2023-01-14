@@ -2,13 +2,13 @@ import baseService from "./base-service";
 
 export const recommendFood = async (sentence, is_soup, data) => {
   try {
-    baseService
+    return baseService
       .post(
         `find_menu?sentence=${encodeURI(sentence)}&is_soup=${is_soup}`,
         data,
       )
       .then((response) => {
-        console.log(response);
+        return response.data;
       });
   } catch (e) {
     console.log("!", e);
