@@ -119,22 +119,9 @@ const Result = () => {
     Confetti();
   }, []);
 
-  const tempData = [
-    { rank: 1, name: "라면", src: food, rate: 99.8 },
-    { rank: 2, name: "짬뽕", src: food, rate: 90.0 },
-    { rank: 3, name: "마라탕", src: food, rate: 89.7 },
-    { rank: 4, name: "김치찌개", src: food, rate: 86.6 },
-    { rank: 5, name: "부대찌개", src: food, rate: 80.4 },
-    { rank: 6, name: "국물 떡볶이", src: food, rate: 77.1 },
-    { rank: 7, name: "매운 쫄갈비", src: food, rate: 77.0 },
-    { rank: 8, name: "된장찌개", src: food, rate: 76.9 },
-    { rank: 9, name: "김치 콩나물국", src: food, rate: 76.8 },
-    { rank: 10, name: "훠궈", src: food, rate: 70.8 },
-  ];
-
   const navigate = useNavigate();
   const location = useLocation();
-  const { foodWant } = location.state || false;
+  const { foodWant, recommendResult } = location.state || false;
   const searchAgain = () => {
     navigate("/search");
   };
@@ -156,15 +143,15 @@ const Result = () => {
     <styled.PageContainier>
       <ResultCover />
       <styled.ResultItems>
-        {tempData.map((item) => (
-          <styled.ResultItem key={item.rank}>
-            <styled.ItemRank>{item.rank}</styled.ItemRank>
+        {recommendResult.map((item, index) => (
+          <styled.ResultItem key={index}>
+            <styled.ItemRank>{index + 1}</styled.ItemRank>
             <styled.ItemContent>
               <div>
                 <img src={item.src} />
                 <p>{item.name}</p>
               </div>
-              <p>{item.rate.toFixed(1)}% 일치</p>
+              <p>{item.score.toFixed(1)}% 일치</p>
             </styled.ItemContent>
           </styled.ResultItem>
         ))}

@@ -10,6 +10,7 @@ const Loading = () => {
   const location = useLocation();
   const { foodWant } = location.state || false;
   const [searchParams] = useSearchParams();
+  const [recommendResult, setRecommendResult] = useState([]);
   const queryList = [...searchParams];
 
   useEffect(() => {
@@ -23,13 +24,14 @@ const Loading = () => {
     if (!foodWant) navigate("/search");
     recommendFood(foodWant, isSoup, data).then((res) => {
       console.log(res);
+      setRecommendResult(res);
     });
   }, []);
 
   const callback = () => {
     if (progress > 100) {
       // 로딩이 완료된 경우
-      navigate("/result", { state: { foodWant } });
+      navigate("/result", { state: { foodWant, recommendResult } });
     }
     setProgress(progress + 1);
   };
