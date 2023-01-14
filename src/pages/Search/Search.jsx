@@ -11,6 +11,14 @@ const Search = () => {
     { bool: true, content: "국물 있음" },
     { bool: false, content: "국물 없음" },
   ];
+
+  const categoryNation = [
+    { index: 0, content: "한식"},
+    { index: 1, content: "중식"},
+    { index: 2, content: "일식"},
+    { index: 3, content: "양식"},
+  ]
+
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
   const [foodWant, setFoodWant] = useState("");
@@ -21,7 +29,17 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
+  const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
+
+  const clickNation = (index) => {
+    if (foodNation.includes(index)) {
+      const deletedArray = foodNation.filter((number) => number != index);
+      setFoodNation(deletedArray);
+    } else {
+      setFoodNation([...foodNation, index]);
+    }
+  }
 
   const navigateToLoading = () => {
     if (foodWant != "") {
@@ -146,6 +164,17 @@ const Search = () => {
                 flag={isSoup === soup.bool}
               >
                 {soup.content}
+              </styled.BtnContent>
+            ))}
+          </styled.BtnBox>
+          <styled.BtnBox>
+            {categoryNation.map((nation) => (
+              <styled.BtnContent
+                key={nation.index}
+                onClick={() => clickNation(nation.index)}
+                flag={foodNation.includes(nation.index)}
+              >
+                {nation.content}
               </styled.BtnContent>
             ))}
           </styled.BtnBox>

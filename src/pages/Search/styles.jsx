@@ -137,6 +137,7 @@ export const Index = styled.div`
 `;
 
 export const BtnContent = styled.button`
+  min-width: 52px;
   background: #ffffff;
   border: 0.7px solid ${(props) => (props.flag ? "#005EEB" : "#999999")};
   border-radius: 20px;
@@ -148,6 +149,7 @@ export const BtnContent = styled.button`
   line-height: 18px;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
   color: ${(props) => (props.flag ? "#005EEB" : "#999999")};
   padding: 5px 10px 5px 10px;
