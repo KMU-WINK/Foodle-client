@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as styled from "./styles";
 import { useNavigate } from "react-router-dom";
 import { getSearchMenus } from "../../axios/auto-complete";
+import * as Hangul from "hangul-js";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -59,7 +60,9 @@ const Search = () => {
   const changeInputValue = (event) => {
     setInputValue(event.target.value);
     setIsHaveInputValue(true);
-    getSearchMenus({ separatedElement: inputValue });
+    const data = Hangul.disassemble(inputValue).join("");
+    console.log(data);
+    getSearchMenus({ separatedElement: data });
   };
 
   const clickDropDownItem = (clickedItem) => {
