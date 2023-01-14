@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as styled from "./styles";
 import { useNavigate } from "react-router-dom";
+import { getSearchMenus } from "../../axios/auto-complete";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Search = () => {
   const changeInputValue = (event) => {
     setInputValue(event.target.value);
     setIsHaveInputValue(true);
+    getSearchMenus({ separatedElement: inputValue });
   };
 
   const clickDropDownItem = (clickedItem) => {
