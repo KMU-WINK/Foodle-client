@@ -29,6 +29,10 @@ const Search = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
+  const [isMeat, setIsMeat] = useState(false);      // 고기류
+  const [isRice, setIsRice] = useState(false);      // 밥류
+  const [isNoodle, setIsNoodle] = useState(false);  // 면류
+
   const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
 
@@ -157,6 +161,7 @@ const Search = () => {
             })}
           </styled.BannedItems>
           <styled.Title>카테고리</styled.Title>
+          <styled.BtnTitle>국물</styled.BtnTitle>
           <styled.BtnBox>
             {categorySoup.map((soup) => (
               <styled.BtnContent
@@ -168,6 +173,7 @@ const Search = () => {
               </styled.BtnContent>
             ))}
           </styled.BtnBox>
+          <styled.BtnTitle>나라</styled.BtnTitle>
           <styled.BtnBox>
             {categoryNation.map((nation) => (
               <styled.BtnContent
@@ -178,6 +184,12 @@ const Search = () => {
                 {nation.content}
               </styled.BtnContent>
             ))}
+          </styled.BtnBox>
+          <styled.BtnTitle>기타</styled.BtnTitle>
+          <styled.BtnBox>
+            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>고기류</styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>밥류</styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsNoodle(!isNoodle)} flag={isNoodle}>면류</styled.BtnContent>
           </styled.BtnBox>
         </div>
         <styled.BtnSearch
