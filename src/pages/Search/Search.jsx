@@ -64,7 +64,6 @@ const Search = () => {
     setInputValue("");
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(false);
-    console.log(bannedFood);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
