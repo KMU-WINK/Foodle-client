@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import food from "../../images/test_food.svg";
 import kakao from "../../images/ic_kakao.svg";
 import link from "../../images/ic_link.svg";
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1";
@@ -148,7 +147,16 @@ const Result = () => {
             <styled.ItemRank>{index + 1}</styled.ItemRank>
             <styled.ItemContent>
               <div>
-                <img src={item.src} />
+                <img
+                  src={encodeURI(
+                    `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${item.name}.jpg`
+                  )}
+                  onError={(e) => {
+                    e.target.src = encodeURI(
+                      `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${item.name}.jpeg`
+                    );
+                  }}
+                />
                 <p>{item.name}</p>
               </div>
               <p>{item.score.toFixed(1)}% 일치</p>

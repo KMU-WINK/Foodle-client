@@ -55,6 +55,12 @@ export const ItemContent = styled.div`
     display: flex;
     align-items: center;
 
+    img {
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+    }
+
     p {
       font-family: "Noto Sans CJK KR";
       margin: 0px 0px 0px 19px;
