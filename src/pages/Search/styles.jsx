@@ -157,7 +157,7 @@ export const BtnContent = styled.button`
 export const BannedItems = styled.div`
   width: 350px;
   display: flex;
-  flex-wrap : wrap;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   margin-top: 12px;
