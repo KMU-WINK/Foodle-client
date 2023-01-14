@@ -23,7 +23,6 @@ const Loading = () => {
 
     if (!(isSoup && data && foodWant)) navigate("/search");
     recommendFood(foodWant, isSoup, data).then((res) => {
-      console.log(res);
       setRecommendResult(res);
     });
   }, []);
