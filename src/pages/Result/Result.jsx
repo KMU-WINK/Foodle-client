@@ -143,17 +143,19 @@ const Result = () => {
       <ResultCover />
       <styled.ResultItems>
         {recommendResult.map((item, index) => (
+          
           <styled.ResultItem key={index}>
             <styled.ItemRank>{index + 1}</styled.ItemRank>
             <styled.ItemContent>
               <div>
                 <img
                   src={encodeURI(
-                    `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${item.name}.jpg`
+                    `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${encodeURIComponent(item.name)}.jpg`
                   )}
                   onError={(e) => {
+                    console.log(`https://foodle-image.s3.ap-northeast-2.amazonaws.com/${encodeURIComponent(item.name)}.jpeg`);
                     e.target.src = encodeURI(
-                      `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${item.name}.jpeg`
+                      `https://foodle-image.s3.ap-northeast-2.amazonaws.com/${encodeURIComponent(item.name)}.jpeg`
                     );
                   }}
                 />
