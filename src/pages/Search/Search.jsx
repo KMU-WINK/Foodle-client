@@ -61,7 +61,7 @@ const Search = () => {
   };
 
   const clickDropDownItem = (clickedItem) => {
-    setInputValue('');
+    setInputValue("");
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(false);
     console.log(bannedFood);
@@ -72,6 +72,11 @@ const Search = () => {
   const blurFoodWant = () => {
     setFoodWant(foodWant.trimEnd());
     setKeyboard(false);
+  };
+  const removeBannedItem = (delIndex) => {
+    setBannedFood(bannedFood.filter(function(_, index) {
+      return index !== delIndex
+    }));
   };
 
   useEffect(showDropDownList, [inputValue]);
@@ -130,8 +135,15 @@ const Search = () => {
             </styled.DropDownBox>
           )}
           <styled.BannedItems>
-            {bannedFood.map((item) => {
-              return <styled.BannedItem>{item} ✕</styled.BannedItem>;
+            {bannedFood.map((item, index) => {
+              return (
+                <styled.BannedItem
+                  key={index}
+                  onClick={() => removeBannedItem(index)}
+                >
+                  {item} ✕
+                </styled.BannedItem>
+              );
             })}
           </styled.BannedItems>
           <styled.Title>카테고리</styled.Title>
