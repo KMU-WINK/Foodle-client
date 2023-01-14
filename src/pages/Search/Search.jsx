@@ -13,11 +13,11 @@ const Search = () => {
   ];
 
   const categoryNation = [
-    { index: 0, content: "한식"},
-    { index: 1, content: "중식"},
-    { index: 2, content: "일식"},
-    { index: 3, content: "양식"},
-  ]
+    { index: 0, content: "한식" },
+    { index: 1, content: "중식" },
+    { index: 2, content: "일식" },
+    { index: 3, content: "양식" },
+  ];
 
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
@@ -39,7 +39,7 @@ const Search = () => {
     } else {
       setFoodNation([...foodNation, index]);
     }
-  }
+  };
 
   const navigateToLoading = () => {
     if (foodWant != "") {
@@ -70,6 +70,7 @@ const Search = () => {
 
   const clickDropDownItem = (clickedItem) => {
     setInputValue("");
+    if (bannedFood.length === 5) return;
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(false);
   };
@@ -87,7 +88,6 @@ const Search = () => {
       })
     );
   };
-  
 
   useEffect(showDropDownList, [inputValue]);
 
