@@ -194,7 +194,9 @@ const Result = () => {
         </styled.ShareButton>
       </styled.ShareButtons>
       <div className="adfit" />
-      {modalOpen && <Modal ModalInfo={{ setModalOpen, modalType, shareLink }} />}
+      {modalOpen && (
+        <Modal ModalInfo={{ setModalOpen, modalType, shareLink }} />
+      )}
     </styled.PageContainier>
   );
 };

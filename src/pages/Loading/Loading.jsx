@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { recommendFood } from "../../axios/find-food";
 import * as styled from "./styles";
 
@@ -9,18 +9,16 @@ const Loading = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { myRes } = location.state || false;
-  const [searchParams] = useSearchParams();
   const [recommendResult, setRecommendResult] = useState([]);
-  const queryList = [...searchParams];
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const urlParmas = url.searchParams;
 
-    const foodWant = urlParmas.get('want') || queryList[0][1];
-    const isSoup = urlParmas.get('is') || queryList[2][1];
+    const foodWant = urlParmas.get("want");
+    const isSoup = urlParmas.get("is");
     const data = {
-      ban: urlParmas.get('ban') || queryList[1][1],
+      ban: urlParmas.get("ban"),
     };
 
     if (!(isSoup && data && foodWant)) navigate("/search");
