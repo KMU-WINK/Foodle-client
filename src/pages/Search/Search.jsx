@@ -87,6 +87,7 @@ const Search = () => {
       })
     );
   };
+  
 
   useEffect(showDropDownList, [inputValue]);
 
