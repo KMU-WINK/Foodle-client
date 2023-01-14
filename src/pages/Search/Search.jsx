@@ -13,11 +13,11 @@ const Search = () => {
   ];
 
   const categoryNation = [
-    { index: 0, content: "한식"},
-    { index: 1, content: "중식"},
-    { index: 2, content: "일식"},
-    { index: 3, content: "양식"},
-  ]
+    { index: 0, content: "한식" },
+    { index: 1, content: "중식" },
+    { index: 2, content: "일식" },
+    { index: 3, content: "양식" },
+  ];
 
   const [bannedFood, setBannedFood] = useState([]);
   const [keyboard, setKeyboard] = useState(false);
@@ -25,53 +25,39 @@ const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-  const [dropDownList, setDropDownList] = useState(searchResult);
+  const [dropDownList, setDropDownList] = useState([]);
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [isFocus, setIsFocus] = useState(false);
   const [isSoup, setIsSoup] = useState(true);
+  const [isMeat, setIsMeat] = useState(false); // 고기류
+  const [isRice, setIsRice] = useState(false); // 밥류
+  const [isNoodle, setIsNoodle] = useState(false); // 면류
+
   const [foodNation, setFoodNation] = useState([]);
   const myRes = true;
 
   const clickNation = (index) => {
     if (foodNation.includes(index)) {
-      const deletedArray = foodNation.filter((number) => number != index);
+      const deletedArray = foodNation.filter((number) => number !== index);
       setFoodNation(deletedArray);
     } else {
       setFoodNation([...foodNation, index]);
     }
-  }
+  };
 
   const navigateToLoading = () => {
-    if (foodWant != "") {
+    if (foodWant !== "") {
       navigate(`/loading?want=${foodWant}&ban=${bannedFood}&is=${isSoup}`, {
         state: { foodWant, myRes },
       });
     }
   };
 
-  const showDropDownList = () => {
-    if (inputValue == "") {
-      setIsHaveInputValue(false);
-      setDropDownList([]);
-    } else {
-      setDropDownList(searchResult);
-    }
-  };
-
-  const changeInputValue = (event) => {
-    setInputValue(event.target.value);
-    setIsHaveInputValue(true);
-    const data = Hangul.disassemble(inputValue).join("");
-    const body = { separatedElement: data };
-    getSearchMenus(body).then((r) => {
-      setSearchResult(r);
-    });
-  };
-
   const clickDropDownItem = (clickedItem) => {
-    setInputValue("");
+    setInputValue(() => "");
+    if (bannedFood.length === 5) return;
     setBannedFood([...new Set([clickedItem, ...bannedFood])]);
-    setIsHaveInputValue(false);
+    setIsHaveInputValue(() => false);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
@@ -87,9 +73,29 @@ const Search = () => {
       })
     );
   };
-  
 
-  useEffect(showDropDownList, [inputValue]);
+  useEffect(() => {
+    if (inputValue) {
+      const body = {
+        separatedElement: Hangul.disassemble(inputValue).join(""),
+      };
+      getSearchMenus(body).then((r) => {
+        setSearchResult(r);
+      });
+    } else {
+      setSearchResult([]);
+    }
+  }, [inputValue]);
+
+  useEffect(() => {
+    if (searchResult) {
+      setDropDownList(() => searchResult);
+      setIsHaveInputValue(() => true);
+    } else {
+      setDropDownList(() => []);
+      setIsHaveInputValue(() => false);
+    }
+  }, [searchResult]);
 
   return (
     <styled.FlexBox>
@@ -110,7 +116,7 @@ const Search = () => {
           <styled.Input
             type="text"
             value={inputValue}
-            onChange={changeInputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             onFocus={() => {
               setIsFocus(true);
               setKeyboard(true);
@@ -121,7 +127,7 @@ const Search = () => {
             }}
             placeholder="ex. 떡볶이"
           />
-          {isHaveInputValue && (
+          {isHaveInputValue && inputValue && (
             <styled.DropDownBox>
               {dropDownList.length === 0 && (
                 <styled.DropDownItem
@@ -136,7 +142,7 @@ const Search = () => {
                   <styled.DropDownItem
                     key={index}
                     onClick={() => clickDropDownItem(item.name)}
-                    focus={dropDownIndex == index}
+                    focus={dropDownIndex === index}
                   >
                     {item.name}
                   </styled.DropDownItem>
@@ -157,6 +163,7 @@ const Search = () => {
             })}
           </styled.BannedItems>
           <styled.Title>카테고리</styled.Title>
+          <styled.BtnTitle>국물</styled.BtnTitle>
           <styled.BtnBox>
             {categorySoup.map((soup) => (
               <styled.BtnContent
@@ -168,6 +175,7 @@ const Search = () => {
               </styled.BtnContent>
             ))}
           </styled.BtnBox>
+          <styled.BtnTitle>나라</styled.BtnTitle>
           <styled.BtnBox>
             {categoryNation.map((nation) => (
               <styled.BtnContent
@@ -179,10 +187,25 @@ const Search = () => {
               </styled.BtnContent>
             ))}
           </styled.BtnBox>
+          <styled.BtnTitle>기타</styled.BtnTitle>
+          <styled.BtnBox>
+            <styled.BtnContent onClick={() => setIsMeat(!isMeat)} flag={isMeat}>
+              고기류
+            </styled.BtnContent>
+            <styled.BtnContent onClick={() => setIsRice(!isRice)} flag={isRice}>
+              밥류
+            </styled.BtnContent>
+            <styled.BtnContent
+              onClick={() => setIsNoodle(!isNoodle)}
+              flag={isNoodle}
+            >
+              면류
+            </styled.BtnContent>
+          </styled.BtnBox>
         </div>
         <styled.BtnSearch
           keyboard={keyboard}
-          active={foodWant != ""}
+          active={foodWant !== ""}
           onClick={() => navigateToLoading()}
         >
           검색하기
