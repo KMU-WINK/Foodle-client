@@ -51,4 +51,5 @@ export const Magnifier = styled.img.attrs({
 })`
   width: 20px;
   height: 20px;
+  cursor: pointer;
 `;
