@@ -73,9 +73,11 @@ const Search = () => {
     setKeyboard(false);
   };
   const removeBannedItem = (delIndex) => {
-    setBannedFood(bannedFood.filter(function(_, index) {
-      return index !== delIndex
-    }));
+    setBannedFood(
+      bannedFood.filter(function (_, index) {
+        return index !== delIndex;
+      })
+    );
   };
 
   useEffect(showDropDownList, [inputValue]);
@@ -93,7 +95,7 @@ const Search = () => {
             onChange={changeFoodWant}
             onBlur={blurFoodWant}
             onFocus={focusFoodWant}
-            placeholder="ex. 약간 맵고 달달한 음식"
+            placeholder="ex. 약간 맵고 달달한"
           />
           <styled.Title>먹기 싫은 음식</styled.Title>
           <styled.Input
