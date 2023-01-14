@@ -61,10 +61,9 @@ const Search = () => {
   };
 
   const clickDropDownItem = (clickedItem) => {
-    setInputValue(clickedItem);
-    setBannedFood([clickedItem, ...bannedFood]);
+    setInputValue("");
+    setBannedFood([...new Set([clickedItem, ...bannedFood])]);
     setIsHaveInputValue(false);
-    console.log(bannedFood);
   };
 
   const changeFoodWant = (event) => setFoodWant(event.target.value.trimStart());
@@ -73,8 +72,11 @@ const Search = () => {
     setFoodWant(foodWant.trimEnd());
     setKeyboard(false);
   };
-
-  useEffect(() => console.log(bannedFood), [bannedFood]);
+  const removeBannedItem = (delIndex) => {
+    setBannedFood(bannedFood.filter(function(_, index) {
+      return index !== delIndex
+    }));
+  };
 
   useEffect(showDropDownList, [inputValue]);
 
@@ -131,6 +133,18 @@ const Search = () => {
               })}
             </styled.DropDownBox>
           )}
+          <styled.BannedItems>
+            {bannedFood.map((item, index) => {
+              return (
+                <styled.BannedItem
+                  key={index}
+                  onClick={() => removeBannedItem(index)}
+                >
+                  {item} ✕
+                </styled.BannedItem>
+              );
+            })}
+          </styled.BannedItems>
           <styled.Title>카테고리</styled.Title>
           <styled.BtnBox>
             {categorySoup.map((soup) => (

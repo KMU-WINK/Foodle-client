@@ -153,3 +153,29 @@ export const BtnContent = styled.button`
   padding: 5px 10px 5px 10px;
   margin: 0px 4px 0px 0px;
 `;
+
+export const BannedItems = styled.div`
+  width: 350px;
+  display: flex;
+  flex-wrap : wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+`;
+
+export const BannedItem = styled.div`
+  padding: 4px 8px;
+  font-family: "Noto Sans CJK KR";
+  font-size: 12px;
+  background: #ffffff;
+  color: #005eeb;
+  border: 1px solid #005eeb;
+  border-radius: 8px;
+  white-space: nowrap;
+  :hover {
+    cursor: pointer;
+    border: 1px solid #80aef5;
+    background-color: #80aef5;
+    color: #ffffff;
+  }
+`;
