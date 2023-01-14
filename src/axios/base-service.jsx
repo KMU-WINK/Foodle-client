@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = new URL("https://3.37.245.228:8000/");
+const baseURL = new URL("https://3.37.52.45:8000/");
 
 const autoCompleteURL = new URL("http://43.200.252.58:8080");
 
